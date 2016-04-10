@@ -4,37 +4,32 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Hexo</title>
+  <title>android Binder跨进程 AIDL使用 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="android Binder跨进程 AIDL使用标签： android[TOC]
-1. Binder通信机制流程(整体框架)
+  <meta name="description" content="1. Binder通信机制流程(整体框架)
 2. 如何使用AIDL一. 服务端
 创建一个专门用来 存放AIDL文件的包 如 com.kkk.myaidl
 在 com.kkk.myaidl 包下建一个.aidl文件，如 IService.aidl,代码如下。
-12345678package com.kkk.myaidl">
+12345678package com.kkk.myaidl;import com.kkk.aidl.Person;//很重要，即使在同一个包">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="android Binder跨进程 AIDL使用">
 <meta property="og:url" content="http://yoursite.com/2016/04/10/android Binder跨进程 AIDL使用/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="android Binder跨进程 AIDL使用标签： android[TOC]
-1. Binder通信机制流程(整体框架)
+<meta property="og:description" content="1. Binder通信机制流程(整体框架)
 2. 如何使用AIDL一. 服务端
 创建一个专门用来 存放AIDL文件的包 如 com.kkk.myaidl
 在 com.kkk.myaidl 包下建一个.aidl文件，如 IService.aidl,代码如下。
-12345678package com.kkk.myaidl">
+12345678package com.kkk.myaidl;import com.kkk.aidl.Person;//很重要，即使在同一个包">
 <meta property="og:image" content="http://img.blog.csdn.net/20130529140129511">
-<meta property="og:updated_time" content="2016-04-10T05:58:38.134Z">
+<meta property="og:updated_time" content="2016-04-10T07:44:54.998Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="android Binder跨进程 AIDL使用标签： android[TOC]
-1. Binder通信机制流程(整体框架)
+<meta name="twitter:title" content="android Binder跨进程 AIDL使用">
+<meta name="twitter:description" content="1. Binder通信机制流程(整体框架)
 2. 如何使用AIDL一. 服务端
 创建一个专门用来 存放AIDL文件的包 如 com.kkk.myaidl
 在 com.kkk.myaidl 包下建一个.aidl文件，如 IService.aidl,代码如下。
-12345678package com.kkk.myaidl">
+12345678package com.kkk.myaidl;import com.kkk.aidl.Person;//很重要，即使在同一个包">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20130529140129511">
-  
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -50,12 +45,12 @@
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
 			
-			<img lazy-src="null" class="js-avatar">
+			<img lazy-src="http://tp2.sinaimg.cn/1516632017/180/5721987710/1" class="js-avatar">
 			
 		</a>
 
 		<hgroup>
-		  <h1 class="header-author"><a href="/">John Doe</a></h1>
+		  <h1 class="header-author"><a href="/">z3jjlzt</a></h1>
 		</hgroup>
 
 		
@@ -72,16 +67,6 @@
 							<div class="ribbon"></div>
 						</div>
 						
-						<div class="icon-wrap icon-link hide" data-idx="2">
-							<div class="loopback_l"></div>
-							<div class="loopback_r"></div>
-						</div>
-						
-						
-						<div class="icon-wrap icon-me hide" data-idx="3">
-							<div class="user"></div>
-							<div class="shoulder"></div>
-						</div>
 						
 					</div>
 					
@@ -92,10 +77,6 @@
 						<li>Menu</li>
 						<li>Tags</li>
 						
-						<li>Links</li>
-						
-						
-						<li>Über</li>
 						
 					</ul>
 				</div>
@@ -110,20 +91,18 @@
 						
 							<li><a href="/">主页</a></li>
 				        
-							<li><a href="/archives">所有文章</a></li>
+							<li><a href="/archives">时间轴</a></li>
 				        
 						</ul>
 					</nav>
 					<nav class="header-nav">
 						<div class="social">
 							
-								<a class="github" target="_blank" href="#" title="github">github</a>
+								<a class="github" target="_blank" href="https://github.com/z3jjlzt" title="github">github</a>
 					        
-								<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+								<a class="weibo" target="_blank" href="http://weibo.com/z3jjlzt " title="weibo">weibo</a>
 					        
-								<a class="rss" target="_blank" href="#" title="rss">rss</a>
-					        
-								<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/z3jjlzt" title="zhihu">zhihu</a>
 					        
 						</div>
 					</nav>
@@ -132,37 +111,13 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						
+						<a href="/tags/android/" style="font-size: 10px;">android</a>
 					</div>
 				</section>
 				
 				
 				
-				<section class="switch-part switch-part3">
-					<div id="js-friends">
-					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
-			        
-			        </div>
-				</section>
-				
 
-				
-				
-				<section class="switch-part switch-part4">
-				
-					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
-				</section>
 				
 			</div>
 		</div>
@@ -174,17 +129,17 @@
       <nav id="mobile-nav">
   	<div class="overlay">
   		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">John Doe</h1>
+  		<h1 class="header-author js-mobile-header hide">z3jjlzt</h1>
   	</div>
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
 			
-				<img lazy-src="null" class="js-avatar">
+				<img lazy-src="http://tp2.sinaimg.cn/1516632017/180/5721987710/1" class="js-avatar">
 			
 			</div>
 			<hgroup>
-			  <h1 class="header-author">John Doe</h1>
+			  <h1 class="header-author">z3jjlzt</h1>
 			</hgroup>
 			
 			<nav class="header-menu">
@@ -192,7 +147,7 @@
 				
 					<li><a href="/">主页</a></li>
 		        
-					<li><a href="/archives">所有文章</a></li>
+					<li><a href="/archives">时间轴</a></li>
 		        
 		        <div class="clearfix"></div>
 				</ul>
@@ -200,13 +155,11 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="#" title="github">github</a>
+						<a class="github" target="_blank" href="https://github.com/z3jjlzt" title="github">github</a>
 			        
-						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+						<a class="weibo" target="_blank" href="http://weibo.com/z3jjlzt " title="weibo">weibo</a>
 			        
-						<a class="rss" target="_blank" href="#" title="rss">rss</a>
-			        
-						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/z3jjlzt" title="zhihu">zhihu</a>
 			        
 				</div>
 			</nav>
@@ -218,19 +171,38 @@
   
     <div class="article-meta">
       <a href="/2016/04/10/android Binder跨进程 AIDL使用/" class="article-date">
-  	<time datetime="2016-04-10T05:58:55.493Z" itemprop="datePublished">2016-04-10</time>
+  	<time datetime="2016-04-10T07:33:47.000Z" itemprop="datePublished">2016-04-10</time>
 </a>
     </div>
   
   <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android Binder跨进程 AIDL使用
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="android-Binder跨进程-AIDL使用"><a href="#android-Binder跨进程-AIDL使用" class="headerlink" title="android Binder跨进程 AIDL使用"></a>android Binder跨进程 AIDL使用</h1><h2 id="标签：-android"><a href="#标签：-android" class="headerlink" title="标签： android"></a>标签： android</h2><p>[TOC]</p>
-<h2 id="1-Binder通信机制流程-整体框架"><a href="#1-Binder通信机制流程-整体框架" class="headerlink" title="1. Binder通信机制流程(整体框架)"></a>1. Binder通信机制流程(整体框架)</h2><p><img src="http://img.blog.csdn.net/20130529140129511" alt=""></p>
+        <h2 id="1-Binder通信机制流程-整体框架"><a href="#1-Binder通信机制流程-整体框架" class="headerlink" title="1. Binder通信机制流程(整体框架)"></a>1. Binder通信机制流程(整体框架)</h2><p><img src="http://img.blog.csdn.net/20130529140129511" alt=""></p>
 <h2 id="2-如何使用AIDL"><a href="#2-如何使用AIDL" class="headerlink" title="2. 如何使用AIDL"></a>2. 如何使用AIDL</h2><h3 id="一-服务端"><a href="#一-服务端" class="headerlink" title="一. 服务端"></a>一. 服务端</h3><ul>
 <li>创建一个专门用来 存放AIDL文件的包 如 <code>com.kkk.myaidl</code></li>
 <li><p>在 <code>com.kkk.myaidl</code> 包下建一个.aidl文件，如 <code>IService.aidl</code>,代码如下。</p>
@@ -252,7 +224,7 @@
 <h3 id="二-客户端"><a href="#二-客户端" class="headerlink" title="二. 客户端"></a>二. 客户端</h3><ul>
 <li>将服务端工程中的<code>com.kkk.myaidl</code>包整个拷贝到客户端中。双方的aidl包名必须完全一致，否则会报错。</li>
 <li><p>新建一个ServiceConnection。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> ServiceConnection mconnection = <span class="keyword">new</span> ServiceConnection()&#123;</span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceDisconnected</span><span class="params">(ComponentName name)</span>  </span><br><span class="line">       </span>&#123;  </span><br><span class="line">           mIMyService = <span class="keyword">null</span>;  </span><br><span class="line">       &#125;  </span><br><span class="line"> </span><br><span class="line">       <span class="meta">@Override</span>  </span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceConnected</span><span class="params">(ComponentName name, IBinder service)</span>  </span><br><span class="line">       </span>&#123;  </span><br><span class="line">           <span class="comment">//通过服务端onBind方法返回的binder对象得到MyService的实例，得到实例就可以调用它的方法了  </span></span><br><span class="line">            mIServiceaidl =IServiceaidl.Stub.asInterface(service);</span><br><span class="line">       &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> ServiceConnection mconnection = <span class="keyword">new</span> ServiceConnection()&#123;</span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceDisconnected</span><span class="params">(ComponentName name)</span>  </span><br><span class="line">       </span>&#123;  </span><br><span class="line">           mIMyService = <span class="keyword">null</span>;  </span><br><span class="line">       &#125;  </span><br><span class="line"></span><br><span class="line">       <span class="meta">@Override</span>  </span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceConnected</span><span class="params">(ComponentName name, IBinder service)</span>  </span><br><span class="line">       </span>&#123;  </span><br><span class="line">           <span class="comment">//通过服务端onBind方法返回的binder对象得到MyService的实例，得到实例就可以调用它的方法了  </span></span><br><span class="line">            mIServiceaidl =IServiceaidl.Stub.asInterface(service);</span><br><span class="line">       &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>绑定service。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">intent.setAction(BIND_SERVICE);</span><br><span class="line">bindService(intent, mconnection, Context.BIND_AUTO_CREATE);</span><br></pre></td></tr></table></figure>
@@ -271,11 +243,15 @@
     
 <nav id="article-nav">
   
-  
-    <a href="/2016/04/10/Rxjava结合Retrofit/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title"></div>
-      <strong class="article-nav-caption">></strong>
+    <a href="/2016/04/10/Rxjava结合Retrofit/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Rxjava结合Retrofit
+        
+      </div>
     </a>
+  
   
 </nav>
 
@@ -308,7 +284,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="android Binder跨进程 AIDL使用" data-title="" data-url="http://yoursite.com/2016/04/10/android Binder跨进程 AIDL使用/"></div>
+	<div class="ds-thread" data-thread-key="android Binder跨进程 AIDL使用" data-title="android Binder跨进程 AIDL使用" data-url="http://yoursite.com/2016/04/10/android Binder跨进程 AIDL使用/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -343,13 +319,11 @@
 </footer>
     </div>
     
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
 
 <script>
 	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
+		fancybox: false,
+		mathjax: false,
 		animate: true,
 		isHome: false,
 		isPost: true,
@@ -365,27 +339,6 @@
 
 
 
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 
 
   </div>
