@@ -7,176 +7,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>面试笔记 | z3jjlzt&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一. J2EE基础
-九种基本数据类型的大小，以及他们的封装类。
-
-
-
-
-基本类型
-大小（字节）
-默认值
-封装类
-
-
-
-
-byte
-1
-0
-Byte
-
-
-short
-2
-0
-Short
-
-
-int
-4
-0
-Integer
-
-
-long
-8
-0L
-Long
-
-
-float
-4
-0.0f
-Float
-
-
-double
-8
-0.0d
-Double
-
-
-boolean
-1
-false
-Boolean">
+  <meta name="description" content="程序员面试笔记。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面试笔记">
 <meta property="og:url" content="http://z3jjlzt.github.io/2016/04/11/面试笔记/index.html">
 <meta property="og:site_name" content="z3jjlzt's blog">
-<meta property="og:description" content="一. J2EE基础
-九种基本数据类型的大小，以及他们的封装类。
-
-
-
-
-基本类型
-大小（字节）
-默认值
-封装类
-
-
-
-
-byte
-1
-0
-Byte
-
-
-short
-2
-0
-Short
-
-
-int
-4
-0
-Integer
-
-
-long
-8
-0L
-Long
-
-
-float
-4
-0.0f
-Float
-
-
-double
-8
-0.0d
-Double
-
-
-boolean
-1
-false
-Boolean">
+<meta property="og:description" content="程序员面试笔记。">
 <meta property="og:image" content="http://images2015.cnblogs.com/blog/679904/201510/679904-20151025192734520-1277367181.png">
-<meta property="og:updated_time" content="2016-04-11T11:46:17.638Z">
+<meta property="og:updated_time" content="2016-04-14T02:10:39.958Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试笔记">
-<meta name="twitter:description" content="一. J2EE基础
-九种基本数据类型的大小，以及他们的封装类。
-
-
-
-
-基本类型
-大小（字节）
-默认值
-封装类
-
-
-
-
-byte
-1
-0
-Byte
-
-
-short
-2
-0
-Short
-
-
-int
-4
-0
-Integer
-
-
-long
-8
-0L
-Long
-
-
-float
-4
-0.0f
-Float
-
-
-double
-8
-0.0d
-Double
-
-
-boolean
-1
-false
-Boolean">
+<meta name="twitter:description" content="程序员面试笔记。">
 <meta name="twitter:image" content="http://images2015.cnblogs.com/blog/679904/201510/679904-20151025192734520-1277367181.png">
   
   
@@ -350,7 +191,7 @@ Boolean">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
+        <h3 id="程序员面试笔记。"><a href="#程序员面试笔记。" class="headerlink" title="程序员面试笔记。"></a>程序员面试笔记。</h3><a id="more"></a>
 <h2 id="一-J2EE基础"><a href="#一-J2EE基础" class="headerlink" title="一. J2EE基础"></a>一. J2EE基础</h2><ul>
 <li>九种基本数据类型的大小，以及他们的封装类。</li>
 </ul>
@@ -421,8 +262,8 @@ Boolean">
 </tbody>
 </table>
 <ul>
-<li><p>equals与==的区别。 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. ==指引用是否相同,equals()指的是值是否相同</span><br><span class="line">2. ==是指对内存地址进行比较,equals()是对字符串的内容进行比较</span><br><span class="line">3. ==是判断两个变量或实例是不是指向同一个内存空间 ,equals是判断两个变量或实例所指向的内存空间的值是不是相同 </span><br><span class="line">4. 使用==比较原生类型如：boolean、int、char等等，使用equals()比较对象。因为原生类型不是对象，没有方法。</span><br></pre></td></tr></table></figure>
+<li><p>equals与==的区别。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. ==指引用是否相同,equals()指的是值是否相同</span><br><span class="line">2. ==是指对内存地址进行比较,equals()是对字符串的内容进行比较</span><br><span class="line">3. ==是判断两个变量或实例是不是指向同一个内存空间 ,equals是判断两个变量或实例所指向的内存空间的值是不是相同</span><br><span class="line">4. 使用==比较原生类型如：boolean、int、char等等，使用equals()比较对象。因为原生类型不是对象，没有方法。</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Switch能否用string做参数？</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在java1.7之前，可以放int,byte,char。因为它们可以自动类型转换为int。java1.7可以使用string类型。</span><br><span class="line">```    </span><br><span class="line">- Object有哪些公用方法</span><br></pre></td></tr></table></figure>
@@ -473,7 +314,7 @@ Boolean">
 </li>
 <li><p>软引用（SoftReference）<br> 如果内存空间足够，垃圾回收器就不会回收它，如果内存空间不足了，就会回收这些对象的内存。只要垃圾回收器没有回收它，该对象就可以被程序使用。软引用可用来实现内存敏感的高速缓存。软引用可以和一个引用队列（ReferenceQueue）联合使用，如果软引用所引用的对象被垃圾回收，Java虚拟机就会把这个软引用加入到与之关联的引用队列中。</p>
 </li>
-<li>弱引用（WeakReference）<br> 一旦发现了只具有弱引用的对象，不管当前内存空间足够与否，都会回收它的内存。不过，由于垃圾回收器是一个优先级很低的线程， 因此不一定会很快发现那些只具有弱引用的对象。  弱引用可以和一个引用队列（ReferenceQueue）联合使用，如果弱引用所引用的对象被垃圾回 收，Java虚拟机就会把这个弱引用加入到与之关联的引用队列中。 <ol>
+<li>弱引用（WeakReference）<br> 一旦发现了只具有弱引用的对象，不管当前内存空间足够与否，都会回收它的内存。不过，由于垃圾回收器是一个优先级很低的线程， 因此不一定会很快发现那些只具有弱引用的对象。  弱引用可以和一个引用队列（ReferenceQueue）联合使用，如果弱引用所引用的对象被垃圾回 收，Java虚拟机就会把这个弱引用加入到与之关联的引用队列中。<ol>
 <li>虚引用（PhantomReference）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- Hashcode的作用。</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
@@ -532,8 +373,7 @@ Boolean">
 <p>二者完全是两个概念。重写Overriding是<strong>父类与子类</strong>之间多态性的一种表现，重载Overloading是<strong>一个类</strong>中多态性的一种表现。</p>
 </blockquote>
 </li>
-<li>Interface与abstract类的区别。</li>
-<li><blockquote>
+<li>Interface与abstract类的区别。<br>-<blockquote>
 <ol>
 <li>抽象类不能被实例化，只能被用作子类的超类，接口是抽象方法的集合</li>
 </ol>
@@ -624,8 +464,8 @@ Boolean">
     </a>
   
   
-    <a href="/2016/04/10/android Binder跨进程 AIDL使用/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">android Binder跨进程 AIDL使用</div>
+    <a href="/2016/04/10/Rxjava结合Retrofit/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Rxjava结合Retrofit</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
