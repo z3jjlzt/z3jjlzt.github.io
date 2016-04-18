@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="z3jjlzt's blog">
 <meta property="og:description" content="程序员面试笔记。">
 <meta property="og:image" content="http://images2015.cnblogs.com/blog/679904/201510/679904-20151025192734520-1277367181.png">
-<meta property="og:updated_time" content="2016-04-18T04:10:51.787Z">
+<meta property="og:updated_time" content="2016-04-18T04:15:48.341Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试笔记">
 <meta name="twitter:description" content="程序员面试笔记。">
@@ -203,7 +203,7 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="程序员面试笔记。"><a href="#程序员面试笔记。" class="headerlink" title="程序员面试笔记。"></a>程序员面试笔记。</h3><a id="more"></a>
-<h2 id="一-J2EE基础"><a href="#一-J2EE基础" class="headerlink" title="一. J2EE基础"></a>一. J2EE基础</h2><ul>
+<h2 id="一-J2EE基础"><a href="#一-J2EE基础" class="headerlink" title="一. J2EE基础."></a>一. J2EE基础.</h2><ul>
 <li>九种基本数据类型的大小，以及他们的封装类。</li>
 </ul>
 <table>
@@ -273,13 +273,13 @@ var _hmt = _hmt || [];
 </tbody>
 </table>
 <ul>
-<li><p>equals与==的区别。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. ==指引用是否相同,equals()指的是值是否相同</span><br><span class="line">2. ==是指对内存地址进行比较,equals()是对字符串的内容进行比较</span><br><span class="line">3. ==是判断两个变量或实例是不是指向同一个内存空间 ,equals是判断两个变量或实例所指向的内存空间的值是不是相同</span><br><span class="line">4. 使用==比较原生类型如：boolean、int、char等等，使用equals()比较对象。因为原生类型不是对象，没有方法。</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Switch能否用string做参数？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在java1.7之前，可以放int,byte,char。因为它们可以自动类型转换为int。java1.7可以使用string类型。</span><br><span class="line">```    </span><br><span class="line">- Object有哪些公用方法</span><br></pre></td></tr></table></figure>
-</li>
+<li>equals与==的区别。</li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. ==指引用是否相同,equals()指的是值是否相同</span><br><span class="line">2. ==是指对内存地址进行比较,equals()是对字符串的内容进行比较</span><br><span class="line">3. ==是判断两个变量或实例是不是指向同一个内存空间 ,equals是判断两个变量或实例所指向的内存空间的值是不是相同</span><br><span class="line">4. 使用==比较原生类型如：boolean、int、char等等，使用equals()比较对象。因为原生类型不是对象，没有方法。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Switch能否用string做参数？</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在java1.7之前，可以放int,byte,char。因为它们可以自动类型转换为int。java1.7可以使用string类型。</span><br><span class="line">```    </span><br><span class="line"></span><br><span class="line">- Object有哪些公用方法</span><br></pre></td></tr></table></figure>
 <ol>
 <li>clone</li>
 </ol>
@@ -319,14 +319,14 @@ var _hmt = _hmt || [];
 <ol>
 <li>notifyAll</li>
 </ol>
-<p>该方法唤醒在该对象上等待的所有线程。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- Java的四种引用，强弱软虚，用到的场景。</span><br></pre></td></tr></table></figure></p>
+<p>该方法唤醒在该对象上等待的所有线程。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- Java的四种引用，强弱软虚，用到的场景。</span><br></pre></td></tr></table></figure></p>
 <ol>
 <li><p>强引用<br> Object obj = new Object();<br> 这里的obj引用便是一个强引用。垃圾回收器绝不会回收它。</p>
 </li>
 <li><p>软引用（SoftReference）<br> 如果内存空间足够，垃圾回收器就不会回收它，如果内存空间不足了，就会回收这些对象的内存。只要垃圾回收器没有回收它，该对象就可以被程序使用。软引用可用来实现内存敏感的高速缓存。软引用可以和一个引用队列（ReferenceQueue）联合使用，如果软引用所引用的对象被垃圾回收，Java虚拟机就会把这个软引用加入到与之关联的引用队列中。</p>
 </li>
 <li>弱引用（WeakReference）<br> 一旦发现了只具有弱引用的对象，不管当前内存空间足够与否，都会回收它的内存。不过，由于垃圾回收器是一个优先级很低的线程， 因此不一定会很快发现那些只具有弱引用的对象。  弱引用可以和一个引用队列（ReferenceQueue）联合使用，如果弱引用所引用的对象被垃圾回 收，Java虚拟机就会把这个弱引用加入到与之关联的引用队列中。<ol>
-<li>虚引用（PhantomReference）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- Hashcode的作用。</span><br></pre></td></tr></table></figure>
+<li>虚引用（PhantomReference）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- Hashcode的作用。</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 </li>
@@ -335,11 +335,11 @@ var _hmt = _hmt || [];
 <p>2、如果两个对象相同，就是适用于equals(java.lang.Object) 方法，那么这两个对象的hashCode一定要相同；</p>
 <p>3、如果对象的equals方法被重写，那么对象的hashCode也尽量重写，并且产生hashCode使用的对象，一定要和equals方法中使用的一致，否则就会违反上面提到的第2点；</p>
 <p>4、两个对象的hashCode相同，并不一定表示两个对象就相同，也就是不一定适用于equals(java.lang.Object)方法，只能够说明这两个对象在散列存储结构中，如Hashtable，他们“存放在同一个篮子里”。</p>
-<p>再归纳一下就是hashCode是用于查找使用的，而equals是用于比较两个对象的是否相等的。也就是说，我们先通过hashcode来判断某个类是否存放某个桶里，但这个桶里可能有很多类，那么我们就需要再通过equals来在这个桶里找到我们要的类。那么。重写了equals()，为什么还要重写hashCode()呢？想想，你要在一个桶里找东西，你必须先要找到这个桶啊，你不通过重写hashcode()来找到桶，光重写equals()有什么用啊<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- ArrayList、LinkedList、Vector的区别。</span><br><span class="line"></span><br><span class="line">![](http://ww1.sinaimg.cn/mw690/5a65f7d1gw1f2rp9prh75j206y07g3yb.jpg)</span><br></pre></td></tr></table></figure></p>
+<p>再归纳一下就是hashCode是用于查找使用的，而equals是用于比较两个对象的是否相等的。也就是说，我们先通过hashcode来判断某个类是否存放某个桶里，但这个桶里可能有很多类，那么我们就需要再通过equals来在这个桶里找到我们要的类。那么。重写了equals()，为什么还要重写hashCode()呢？想想，你要在一个桶里找东西，你必须先要找到这个桶啊，你不通过重写hashcode()来找到桶，光重写equals()有什么用啊<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ArrayList、LinkedList、Vector的区别。</span><br><span class="line"></span><br><span class="line">![](http://ww1.sinaimg.cn/mw690/5a65f7d1gw1f2rp9prh75j206y07g3yb.jpg)</span><br></pre></td></tr></table></figure></p>
 <p>一、同步性<br>ArrayList,LinkedList是不同步的，而Vestor是的。</p>
 <p>二、数据增长<br>Vector缺省情况下自动增长原来一倍的数组长度，ArrayList是原来的50%,所以最后你获得的这个集合所占的空间总是比你实际需要的要大。</p>
 <p>三、检索、插入、删除对象的效率<br>但是，如果在集合的其他位置增加或移除元素那么花费的时间会呈线形增长：O(n-i)，其中n代表集合中元素的个数，i代表元素增加或移除元素的索引位置。在进行上述操作的时候集合中第i和第i个元素之后的所有元素都要执行(n-i)个对象的位移操作。LinkedList中，在插入、删除集合中任何位置的元素所花费的时间都是一样的—O(1)，但它在索引一个元素的时候比较慢，为O(i),其中i是索引的位置。</p>
-<p>所以，如果只是查找特定位置的元素或只在集合的末端增加、移除元素，那么使用Vector或ArrayList都可以。如果是对其它指定位置的插入、删除操作，最好选择LinkedList。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- String、StringBuffer与StringBuilder的区别。</span><br><span class="line"></span><br><span class="line">```   </span><br><span class="line">String 字符串常量,不可变的对象</span><br><span class="line">StringBuffer 字符串变量（线程安全）</span><br><span class="line">StringBuilder 字符串变量（非线程安全）</span><br></pre></td></tr></table></figure></p>
+<p>所以，如果只是查找特定位置的元素或只在集合的末端增加、移除元素，那么使用Vector或ArrayList都可以。如果是对其它指定位置的插入、删除操作，最好选择LinkedList。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- String、StringBuffer与StringBuilder的区别。</span><br><span class="line"></span><br><span class="line">```   </span><br><span class="line">String 字符串常量,不可变的对象</span><br><span class="line">StringBuffer 字符串变量（线程安全）</span><br><span class="line">StringBuilder 字符串变量（非线程安全）</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>Map、Set、List、Queue、Stack的特点与用法。</li>
 </ul>
