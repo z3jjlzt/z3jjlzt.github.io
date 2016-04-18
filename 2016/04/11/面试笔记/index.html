@@ -13,12 +13,13 @@
 <meta property="og:url" content="http://z3jjlzt.github.io/2016/04/11/面试笔记/index.html">
 <meta property="og:site_name" content="z3jjlzt's blog">
 <meta property="og:description" content="程序员面试笔记。">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/5a65f7d1gw1f2rp9prh75j206y07g3yb.jpg">
 <meta property="og:image" content="http://images2015.cnblogs.com/blog/679904/201510/679904-20151025192734520-1277367181.png">
-<meta property="og:updated_time" content="2016-04-18T04:19:07.305Z">
+<meta property="og:updated_time" content="2016-04-18T04:24:11.567Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试笔记">
 <meta name="twitter:description" content="程序员面试笔记。">
-<meta name="twitter:image" content="http://images2015.cnblogs.com/blog/679904/201510/679904-20151025192734520-1277367181.png">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/mw690/5a65f7d1gw1f2rp9prh75j206y07g3yb.jpg">
   
   
     <link rel="icon" href="/favicon.png">
@@ -279,67 +280,29 @@ var _hmt = _hmt || [];
 <ul>
 <li>Switch能否用string做参数？</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在java1.7之前，可以放int,byte,char。因为它们可以自动类型转换为int。java1.7可以使用string类型。</span><br><span class="line">```    </span><br><span class="line"></span><br><span class="line">- Object有哪些公用方法</span><br></pre></td></tr></table></figure>
-<ol>
-<li>clone</li>
-</ol>
-<p>保护方法，实现对象的浅复制，只有实现了Cloneable接口才可以调用该方法，否则抛出CloneNotSupportedException异常。</p>
-<ol>
-<li>getClass</li>
-</ol>
-<p>final方法，获得运行时类型。</p>
-<ol>
-<li>toString</li>
-</ol>
-<p>该方法用得比较多，一般子类都有覆盖。</p>
-<ol>
-<li>finalize</li>
-</ol>
-<p>该方法用于释放资源。因为无法确定该方法什么时候被调用，很少使用。</p>
-<p>5．equals</p>
-<p>该方法是非常重要的一个方法。一般equals和==是不一样的，但是在Object中两者是一样的。子类一般都要重写这个方法。</p>
-<p>6．hashCode</p>
-<p>该方法用于哈希查找，可以减少在查找中使用equals的次数，重写了equals方法一般都要重写hashCode方法。</p>
-<p>一般必须满足obj1.equals(obj2)==true。可以推出obj1.hash- Code()==obj2.hashCode()，但是hashCode相等不一定就满足equals。</p>
-<p>如果不重写hashcode(),在HashSet中添加两个equals的对象，会将两个对象都加入进去。</p>
-<ol>
-<li>wait</li>
-</ol>
-<p>wait方法就是使当前线程等待该对象的锁，当前线程必须是该对象的拥有者，也就是具有该对象的锁。wait()方法一直等待，直到获得锁或者被中断。wait(long timeout)设定一个超时间隔，如果在规定时间内没有获得锁就返回。</p>
-<p>调用该方法后当前线程进入睡眠状态，直到以下事件发生。</p>
-<p>（1）其他线程调用了该对象的notify方法。</p>
-<p>（2）其他线程调用了该对象的notifyAll方法。</p>
-<p>（3）其他线程调用了interrupt中断该线程。</p>
-<p>（4）时间间隔到了。</p>
-<p>此时该线程就可以被调度了，如果是被中断的话就抛出一个InterruptedException异常。</p>
-<ol>
-<li>notify</li>
-</ol>
-<p>该方法唤醒在该对象上等待的某个线程。</p>
-<ol>
-<li>notifyAll</li>
-</ol>
-<p>该方法唤醒在该对象上等待的所有线程。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- Java的四种引用，强弱软虚，用到的场景。</span><br></pre></td></tr></table></figure></p>
-<ol>
-<li><p>强引用<br> Object obj = new Object();<br> 这里的obj引用便是一个强引用。垃圾回收器绝不会回收它。</p>
-</li>
-<li><p>软引用（SoftReference）<br> 如果内存空间足够，垃圾回收器就不会回收它，如果内存空间不足了，就会回收这些对象的内存。只要垃圾回收器没有回收它，该对象就可以被程序使用。软引用可用来实现内存敏感的高速缓存。软引用可以和一个引用队列（ReferenceQueue）联合使用，如果软引用所引用的对象被垃圾回收，Java虚拟机就会把这个软引用加入到与之关联的引用队列中。</p>
-</li>
-<li>弱引用（WeakReference）<br> 一旦发现了只具有弱引用的对象，不管当前内存空间足够与否，都会回收它的内存。不过，由于垃圾回收器是一个优先级很低的线程， 因此不一定会很快发现那些只具有弱引用的对象。  弱引用可以和一个引用队列（ReferenceQueue）联合使用，如果弱引用所引用的对象被垃圾回 收，Java虚拟机就会把这个弱引用加入到与之关联的引用队列中。<ol>
-<li>虚引用（PhantomReference）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- Hashcode的作用。</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-</ol>
-<p>1、hashCode的存在主要是用于查找的快捷性，如Hashtable，HashMap等，hashCode是用来在散列存储结构中确定对象的存储地址的；</p>
-<p>2、如果两个对象相同，就是适用于equals(java.lang.Object) 方法，那么这两个对象的hashCode一定要相同；</p>
-<p>3、如果对象的equals方法被重写，那么对象的hashCode也尽量重写，并且产生hashCode使用的对象，一定要和equals方法中使用的一致，否则就会违反上面提到的第2点；</p>
-<p>4、两个对象的hashCode相同，并不一定表示两个对象就相同，也就是不一定适用于equals(java.lang.Object)方法，只能够说明这两个对象在散列存储结构中，如Hashtable，他们“存放在同一个篮子里”。</p>
-<p>再归纳一下就是hashCode是用于查找使用的，而equals是用于比较两个对象的是否相等的。也就是说，我们先通过hashcode来判断某个类是否存放某个桶里，但这个桶里可能有很多类，那么我们就需要再通过equals来在这个桶里找到我们要的类。那么。重写了equals()，为什么还要重写hashCode()呢？想想，你要在一个桶里找东西，你必须先要找到这个桶啊，你不通过重写hashcode()来找到桶，光重写equals()有什么用啊<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ArrayList、LinkedList、Vector的区别。</span><br><span class="line"></span><br><span class="line">![](http://ww1.sinaimg.cn/mw690/5a65f7d1gw1f2rp9prh75j206y07g3yb.jpg)</span><br></pre></td></tr></table></figure></p>
-<p>一、同步性<br>ArrayList,LinkedList是不同步的，而Vestor是的。</p>
-<p>二、数据增长<br>Vector缺省情况下自动增长原来一倍的数组长度，ArrayList是原来的50%,所以最后你获得的这个集合所占的空间总是比你实际需要的要大。</p>
-<p>三、检索、插入、删除对象的效率<br>但是，如果在集合的其他位置增加或移除元素那么花费的时间会呈线形增长：O(n-i)，其中n代表集合中元素的个数，i代表元素增加或移除元素的索引位置。在进行上述操作的时候集合中第i和第i个元素之后的所有元素都要执行(n-i)个对象的位移操作。LinkedList中，在插入、删除集合中任何位置的元素所花费的时间都是一样的—O(1)，但它在索引一个元素的时候比较慢，为O(i),其中i是索引的位置。</p>
-<p>所以，如果只是查找特定位置的元素或只在集合的末端增加、移除元素，那么使用Vector或ArrayList都可以。如果是对其它指定位置的插入、删除操作，最好选择LinkedList。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- String、StringBuffer与StringBuilder的区别。</span><br><span class="line"></span><br><span class="line">```   </span><br><span class="line">String 字符串常量,不可变的对象</span><br><span class="line">StringBuffer 字符串变量（线程安全）</span><br><span class="line">StringBuilder 字符串变量（非线程安全）</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>在java1.7之前，可以放int,byte,char。因为它们可以自动类型转换为int。java1.7可以使用string类型。</p>
+</blockquote>
+<ul>
+<li>Object有哪些公用方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">1. clone</span><br><span class="line"></span><br><span class="line">保护方法，实现对象的浅复制，只有实现了Cloneable接口才可以调用该方法，否则抛出CloneNotSupportedException异常。</span><br><span class="line"></span><br><span class="line">2. getClass</span><br><span class="line"></span><br><span class="line">final方法，获得运行时类型。</span><br><span class="line"></span><br><span class="line">3. toString</span><br><span class="line"></span><br><span class="line">该方法用得比较多，一般子类都有覆盖。</span><br><span class="line"></span><br><span class="line">4. finalize</span><br><span class="line"></span><br><span class="line">该方法用于释放资源。因为无法确定该方法什么时候被调用，很少使用。</span><br><span class="line"></span><br><span class="line">5．equals</span><br><span class="line"></span><br><span class="line">该方法是非常重要的一个方法。一般equals和==是不一样的，但是在Object中两者是一样的。子类一般都要重写这个方法。</span><br><span class="line"></span><br><span class="line">6．hashCode</span><br><span class="line"></span><br><span class="line">该方法用于哈希查找，可以减少在查找中使用equals的次数，重写了equals方法一般都要重写hashCode方法。</span><br><span class="line"></span><br><span class="line">一般必须满足obj1.equals(obj2)==true。可以推出obj1.hash- Code()==obj2.hashCode()，但是hashCode相等不一定就满足equals。</span><br><span class="line"></span><br><span class="line">如果不重写hashcode(),在HashSet中添加两个equals的对象，会将两个对象都加入进去。</span><br><span class="line"></span><br><span class="line">7. wait</span><br><span class="line"></span><br><span class="line">wait方法就是使当前线程等待该对象的锁，当前线程必须是该对象的拥有者，也就是具有该对象的锁。wait()方法一直等待，直到获得锁或者被中断。wait(long timeout)设定一个超时间隔，如果在规定时间内没有获得锁就返回。</span><br><span class="line"></span><br><span class="line">调用该方法后当前线程进入睡眠状态，直到以下事件发生。</span><br><span class="line"></span><br><span class="line">（1）其他线程调用了该对象的notify方法。</span><br><span class="line"></span><br><span class="line">（2）其他线程调用了该对象的notifyAll方法。</span><br><span class="line"></span><br><span class="line">（3）其他线程调用了interrupt中断该线程。</span><br><span class="line"></span><br><span class="line">（4）时间间隔到了。</span><br><span class="line"></span><br><span class="line">此时该线程就可以被调度了，如果是被中断的话就抛出一个InterruptedException异常。</span><br><span class="line"></span><br><span class="line">8. notify</span><br><span class="line"></span><br><span class="line">该方法唤醒在该对象上等待的某个线程。</span><br><span class="line"></span><br><span class="line">9. notifyAll</span><br><span class="line"></span><br><span class="line">该方法唤醒在该对象上等待的所有线程。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Java的四种引用，强弱软虚，用到的场景。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. 强引用</span><br><span class="line">    Object obj = new Object();</span><br><span class="line">    这里的obj引用便是一个强引用。垃圾回收器绝不会回收它。</span><br><span class="line"></span><br><span class="line">2. 软引用（SoftReference）</span><br><span class="line">    如果内存空间足够，垃圾回收器就不会回收它，如果内存空间不足了，就会回收这些对象的内存。只要垃圾回收器没有回收它，该对象就可以被程序使用。软引用可用来实现内存敏感的高速缓存。软引用可以和一个引用队列（ReferenceQueue）联合使用，如果软引用所引用的对象被垃圾回收，Java虚拟机就会把这个软引用加入到与之关联的引用队列中。</span><br><span class="line">3. 弱引用（WeakReference）</span><br><span class="line">    一旦发现了只具有弱引用的对象，不管当前内存空间足够与否，都会回收它的内存。不过，由于垃圾回收器是一个优先级很低的线程， 因此不一定会很快发现那些只具有弱引用的对象。  弱引用可以和一个引用队列（ReferenceQueue）联合使用，如果弱引用所引用的对象被垃圾回 收，Java虚拟机就会把这个弱引用加入到与之关联的引用队列中。</span><br><span class="line">    4. 虚引用（PhantomReference）</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Hashcode的作用。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1、hashCode的存在主要是用于查找的快捷性，如Hashtable，HashMap等，hashCode是用来在散列存储结构中确定对象的存储地址的；</span><br><span class="line"></span><br><span class="line">2、如果两个对象相同，就是适用于equals(java.lang.Object) 方法，那么这两个对象的hashCode一定要相同；</span><br><span class="line"></span><br><span class="line">3、如果对象的equals方法被重写，那么对象的hashCode也尽量重写，并且产生hashCode使用的对象，一定要和equals方法中使用的一致，否则就会违反上面提到的第2点；</span><br><span class="line"></span><br><span class="line">4、两个对象的hashCode相同，并不一定表示两个对象就相同，也就是不一定适用于equals(java.lang.Object)方法，只能够说明这两个对象在散列存储结构中，如Hashtable，他们“存放在同一个篮子里”。</span><br><span class="line"></span><br><span class="line">再归纳一下就是hashCode是用于查找使用的，而equals是用于比较两个对象的是否相等的。也就是说，我们先通过hashcode来判断某个类是否存放某个桶里，但这个桶里可能有很多类，那么我们就需要再通过equals来在这个桶里找到我们要的类。那么。重写了equals()，为什么还要重写hashCode()呢？想想，你要在一个桶里找东西，你必须先要找到这个桶啊，你不通过重写hashcode()来找到桶，光重写equals()有什么用啊</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ArrayList、LinkedList、Vector的区别。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/mw690/5a65f7d1gw1f2rp9prh75j206y07g3yb.jpg" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">一、同步性</span><br><span class="line">ArrayList,LinkedList是不同步的，而Vestor是的。</span><br><span class="line"></span><br><span class="line">二、数据增长</span><br><span class="line">Vector缺省情况下自动增长原来一倍的数组长度，ArrayList是原来的50%,所以最后你获得的这个集合所占的空间总是比你实际需要的要大。</span><br><span class="line"></span><br><span class="line">三、检索、插入、删除对象的效率</span><br><span class="line">但是，如果在集合的其他位置增加或移除元素那么花费的时间会呈线形增长：O(n-i)，其中n代表集合中元素的个数，i代表元素增加或移除元素的索引位置。在进行上述操作的时候集合中第i和第i个元素之后的所有元素都要执行(n-i)个对象的位移操作。LinkedList中，在插入、删除集合中任何位置的元素所花费的时间都是一样的—O(1)，但它在索引一个元素的时候比较慢，为O(i),其中i是索引的位置。</span><br><span class="line"></span><br><span class="line">所以，如果只是查找特定位置的元素或只在集合的末端增加、移除元素，那么使用Vector或ArrayList都可以。如果是对其它指定位置的插入、删除操作，最好选择LinkedList。</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>String、StringBuffer与StringBuilder的区别。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String 字符串常量,不可变的对象</span><br><span class="line">StringBuffer 字符串变量（线程安全）</span><br><span class="line">StringBuilder 字符串变量（非线程安全）</span><br></pre></td></tr></table></figure>
 <ul>
 <li>Map、Set、List、Queue、Stack的特点与用法。</li>
 </ul>
