@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="z3jjlzt's blog">
 <meta property="og:description" content="初步认识java的动态代理">
 <meta property="og:image" content="http://i.imgur.com/oh3VMNs.gif">
-<meta property="og:updated_time" content="2016-04-18T04:19:07.305Z">
+<meta property="og:updated_time" content="2016-04-19T08:42:09.846Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java动态代理初探">
 <meta name="twitter:description" content="初步认识java的动态代理">
@@ -202,22 +202,22 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="初步认识java的动态代理"><a href="#初步认识java的动态代理" class="headerlink" title="初步认识java的动态代理"></a>初步认识java的动态代理</h3> <a id="more"></a>
-<h3 id="何为代理"><a href="#何为代理" class="headerlink" title="何为代理"></a>何为代理</h3><ol>
+        <p>初步认识java的动态代理<br><a id="more"></a></p>
+<h2 id="何为代理"><a href="#何为代理" class="headerlink" title="何为代理"></a>何为代理</h2><ol>
 <li>为其他对象提供一种代理以控制对这个对象的访问。</li>
 <li>动态生成代理类，反射获取类。 代理类与委托类有同样的接口，</li>
 <li>一个代理类的对象与一个委托类的对象关联，代理类的对象本身并不真正实现服务，而是通过调用委托类的对象的相关方法，来提供特定的服务。</li>
 <li>因为Java的单继承特性（每个代理类都继承了Proxy 类），只能针对接口创建代理类，不能针对类创建代理类。</li>
 </ol>
 <p><img src="http://i.imgur.com/oh3VMNs.gif" alt=""></p>
-<h3 id="代理分类"><a href="#代理分类" class="headerlink" title="代理分类"></a>代理分类</h3><ol>
+<h2 id="代理分类"><a href="#代理分类" class="headerlink" title="代理分类"></a>代理分类</h2><ol>
 <li>静态代理：由程序员创建或特定工具自动生成源代码，再对其编译。在程序运行前，代理类的.class文件就已经存在了。</li>
 <li>动态代理：在程序运行时，运用反射机制动态创建而成。</li>
 </ol>
-<h3 id="为何要有动态代理"><a href="#为何要有动态代理" class="headerlink" title="为何要有动态代理"></a>为何要有动态代理</h3><blockquote>
+<h2 id="为何要有动态代理"><a href="#为何要有动态代理" class="headerlink" title="为何要有动态代理"></a>为何要有动态代理</h2><blockquote>
 <p>一个真实角色必须 对应一个代理角色，如果大量使用会导致<strong>类的急剧膨胀</strong>；此外，有时候并不知道真实角色。大量使用这种静态代理，会使我们系统内的类的规模增大，并且<strong>不易维护</strong>；并且由于Proxy和RealSubject的功能 本质上是相同的，Proxy只是起到了中介的作用，这种代理在系统中的存在，导致<strong>系统结构比较臃肿和松散</strong>。</p>
 </blockquote>
-<h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><ul>
+<h2 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h2><ul>
 <li>定义委托类和相关接口</li>
 <li>委托类实现接口</li>
 <li>定义一个ProxyHandler实现InvocationHandler接口</li>
@@ -227,7 +227,7 @@ var _hmt = _hmt || [];
 <li>生成代理对象,使用相关方法</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] agrs)</span></span>&#123;</span><br><span class="line">    <span class="comment">//被代理类</span></span><br><span class="line">    BeautifulGirl beautifulGirl= <span class="keyword">new</span> BeautifulGirl();</span><br><span class="line">    <span class="comment">//jdk通过被代理类的classLoader和interafces动态创建该Proxy类的字节码；</span></span><br><span class="line">    ClassLoader classLoader= beautifulGirl.getClass().getClassLoader();</span><br><span class="line">  Class[] interafces =  beautifulGirl.getClass().getInterfaces();</span><br><span class="line">    <span class="comment">//代理类的处理方法</span></span><br><span class="line">   ProxyHandler proxyHandler =  <span class="keyword">new</span> ProxyHandler(beautifulGirl);</span><br><span class="line">    <span class="comment">//动态生成</span></span><br><span class="line">   Object object = Proxy.newProxyInstance(classLoader,interafces, proxyHandler);</span><br><span class="line">    (  (interface1)object).buyBook();</span><br><span class="line">    (  (interface2)object).buySkirt();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
 <li><a href="http://www.360doc.com/content/14/0801/14/1073512_398598312.shtml" target="_blank" rel="external">360文献</a></li>
 <li><a href="https://github.com/z3jjlzt/DynamicProxyDemo" target="_blank" rel="external">完整代码</a></li>
 </ul>
