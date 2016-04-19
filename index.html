@@ -190,50 +190,7 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><blockquote>
-<p>在 Java 中可以用 wait、notify 和 notifyAll 来实现线程间的通信。<br> obj.wait()方法使本线程挂起，并释放obj对象的monitor，只有<strong><em>其他线程</em></strong>调用obj对象的notify()或notifyAll()时，才可以被唤醒。obj.notifyAll()方法唤醒所有阻塞在obj对象上的沉睡线程，然后<strong><em>被唤醒的众多线程竞争</em></strong>obj对象的monitor占有权，最终得到的那个线程会继续执行下去，但其他线程继续等待。obj.notify()方法是随机唤醒一个沉睡线程。</p>
-</blockquote>
-<ul>
-<li><p>wait，notify和notifyAll只能在<strong><em>同步控制方法</em></strong>或者<strong><em>同步控制块</em></strong>里面使用。</p>
-</li>
-<li><p>永远在<strong>循环(while)</strong> 里调用 wait和notify，不是在If语句,循环会在线程睡眠前后都检查wait的条件，并在条件实际上并未改变的情况下处理唤醒通知。</p>
-</li>
-<li><p>任何一个时刻，对象的控制权（monitor）只能被<strong>一个线程拥有</strong>。</p>
-</li>
-<li><p>无论是执行对象的wait、notify还是notifyAll方法，必须保证当前运行的线程取得了该对象的控制权（monitor）</p>
-</li>
-<li><p>希望上锁的对象就应该被synchronized，即那个在多个线程间被共享的对象。</p>
-</li>
-</ul>
-<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><ul>
-<li>对象调用了wait方法就会使持有该对象的线程把该对象的控制权交出去，然后处于等待状态。</li>
-<li>对象调用了notify就会通知某个正在等待这个对象的控制权的线程，使其获得对象的控制权，继续运行。</li>
-<li>对象调用了notifyAll方法就会通知所有等待这个对象控制权的线程进入线程竞争队列。</li>
-</ul>
-<h2 id="获取对象控制权方法"><a href="#获取对象控制权方法" class="headerlink" title="获取对象控制权方法"></a>获取对象控制权方法</h2><ol>
-<li>执行对象的某个同步实例方法。</li>
-<li>执行对象对应类的同步静态方法。</li>
-<li>执行对该对象加同步锁的同步块。</li>
-</ol>
-<h2 id="wait-与-sleep-区别"><a href="#wait-与-sleep-区别" class="headerlink" title="wait 与 sleep 区别"></a>wait 与 sleep 区别</h2><ol>
-<li>sleep()方法是Thread类的静态方法，仅仅为了让一个线程自身获得一段沉睡时间。sleep可以在任何地方使用。</li>
-<li>wait()方法是object类的方法，解决的问题是<strong>线程间的同步</strong>。</li>
-</ol>
-<p>注意：线程调用notify()之后，只有该<strong>线程完全从 synchronized代码里面执行完毕</strong>后，monitor才会被释放，被唤醒线程才可以真正得到执行权。</p>
-<h2 id="同步的实例：多个生产者与消费者问题"><a href="#同步的实例：多个生产者与消费者问题" class="headerlink" title="同步的实例：多个生产者与消费者问题"></a>同步的实例：多个生产者与消费者问题</h2><ol>
-<li>定义生产者Runnable</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">         <span class="keyword">synchronized</span> (queue) &#123;<span class="comment">//存放Student队列</span></span><br><span class="line">             <span class="keyword">while</span> (queue.size() == MaxSize) &#123;<span class="comment">//队列满则wait 用while 不用if</span></span><br><span class="line">                 System.out.println(<span class="string">"queue is full "</span>+name);</span><br><span class="line">                 <span class="keyword">try</span> &#123;</span><br><span class="line">                     queue.wait();<span class="comment">//为满让出控制权</span></span><br><span class="line">                 &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                     e.printStackTrace();</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;</span><br><span class="line">             <span class="keyword">int</span> age = (<span class="keyword">new</span> Random().nextInt()) % <span class="number">100</span>;</span><br><span class="line">             Student s = <span class="keyword">new</span> Student(age, <span class="string">"student"</span> + age);</span><br><span class="line">             queue.add(s);</span><br><span class="line">             System.out.println(name+<span class="string">"  add : "</span> + s);</span><br><span class="line">             <span class="keyword">try</span> &#123;</span><br><span class="line">                 Thread.sleep(<span class="number">500</span>);<span class="comment">//便于观察</span></span><br><span class="line">             &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                 e.printStackTrace();</span><br><span class="line">             &#125;</span><br><span class="line">             queue.notifyAll();<span class="comment">//通知消费者取走</span></span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>消费者Runnable</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">          <span class="keyword">synchronized</span> (queue) &#123;</span><br><span class="line">              <span class="keyword">while</span> (queue.isEmpty()) &#123;</span><br><span class="line">                  System.out.println(<span class="string">"queue is empty, "</span>+name);</span><br><span class="line">                  <span class="keyword">try</span> &#123;</span><br><span class="line">                      queue.wait();<span class="comment">//为空wait,让出控制权</span></span><br><span class="line">                  &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                      e.printStackTrace();</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">              System.out.println(name+<span class="string">" consume :"</span> + queue.remove());<span class="comment">//取走</span></span><br><span class="line">              <span class="keyword">try</span> &#123;</span><br><span class="line">                  Thread.sleep(<span class="number">500</span>);</span><br><span class="line">              &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                  e.printStackTrace();</span><br><span class="line">              &#125;</span><br><span class="line">              queue.notifyAll();</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>调用</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Queue&lt;Student&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="keyword">new</span> Thread(<span class="keyword">new</span> Prunnable(queue,<span class="string">"P1"</span>)).start();</span><br><span class="line">    <span class="keyword">new</span> Thread(<span class="keyword">new</span> Crunnable(queue,<span class="string">"C1"</span>)).start();</span><br><span class="line">    <span class="keyword">new</span> Thread(<span class="keyword">new</span> Prunnable(queue,<span class="string">"P2"</span>)).start();</span><br><span class="line">    <span class="keyword">new</span> Thread(<span class="keyword">new</span> Crunnable(queue,<span class="string">"C2"</span>)).start();</span><br><span class="line">    <span class="keyword">new</span> Thread(<span class="keyword">new</span> Prunnable(queue,<span class="string">"P3"</span>)).start();</span><br><span class="line">    <span class="keyword">new</span> Thread(<span class="keyword">new</span> Crunnable(queue,<span class="string">"C3"</span>)).start();</span><br><span class="line">    <span class="keyword">new</span> Thread(<span class="keyword">new</span> Prunnable(queue,<span class="string">"P4"</span>)).start();</span><br><span class="line">    <span class="keyword">new</span> Thread(<span class="keyword">new</span> Crunnable(queue,<span class="string">"C4"</span>)).start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
+        <p>生产者与消费者问题。<br>
       
     </div>
     
@@ -246,6 +203,10 @@ var _hmt = _hmt || [];
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/04/19/java同步原理/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
