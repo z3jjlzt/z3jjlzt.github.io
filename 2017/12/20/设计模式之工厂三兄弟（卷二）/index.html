@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="3oWUXzVhlUfeoSOjgRiOfaMRBeyWszShxl6s1ah0AHk" />
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>设计模式之工厂三兄弟（卷二） | z3jjlzt&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="设计模式之工厂三兄弟。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式之工厂三兄弟（卷二）">
+<meta property="og:url" content="http://z3jjlzt.github.io/2017/12/20/设计模式之工厂三兄弟（卷二）/index.html">
+<meta property="og:site_name" content="z3jjlzt's blog">
+<meta property="og:description" content="设计模式之工厂三兄弟。">
+<meta property="og:image" content="http://www.plantuml.com/plantuml/png/SoWkIImgAStDuSfBp4qjBaXCJbL8pi_LoyxErYimL51E1GE5QgxadCJYOWNddCpKl99ghbekg81ROd99Vb5bDPTsSb5gOabgG55-IcboYOQcLLb-PWg6EaTY5JeHL0WL1whBDKH8eiWvufDqGfC40fWZ5NHB2tHhx61kKR1wldlviyxz2Z05JZWLm2o6AO3oCHGuuL00iq51hxH0pmuQt31Dg89mn-eLPQPdbEZ1pN9Ki8A47CAvw4gSu4fgkHnIyrA0yGy0">
+<meta property="og:image" content="http://www.plantuml.com/plantuml/png/fPDB2i8m48RtEKN0ZI86scKNfHt1jLS8QT3I9sagIEq1F8c7SE5jz1gAxRJQ1mNDykERFpDvE9dcIkTHI68UoIpbGbAHH2m80fOQT2RVYnP4X3pBw3hqPQmBKf8QRBZGYJeMP2cKv5fkLUBbGhlpXNL8VA-30N6ttlqt07u8g1Emu6CgHCO0C_iC1j10ALIbXE3GT9MdgvEDCr3hSRtSppUA0emAJODe8EWhvgG2tHH0fJ7CKGDxfInFcLq_a6RpGGhVj3qEflpTNhEsLSEgBczSWQu2_HHpKe56AOaZO-_r7vu0">
+<meta property="og:updated_time" content="2017-12-29T15:37:34.093Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式之工厂三兄弟（卷二）">
+<meta name="twitter:description" content="设计模式之工厂三兄弟。">
+<meta name="twitter:image" content="http://www.plantuml.com/plantuml/png/SoWkIImgAStDuSfBp4qjBaXCJbL8pi_LoyxErYimL51E1GE5QgxadCJYOWNddCpKl99ghbekg81ROd99Vb5bDPTsSb5gOabgG55-IcboYOQcLLb-PWg6EaTY5JeHL0WL1whBDKH8eiWvufDqGfC40fWZ5NHB2tHhx61kKR1wldlviyxz2Z05JZWLm2o6AO3oCHGuuL00iq51hxH0pmuQt31Dg89mn-eLPQPdbEZ1pN9Ki8A47CAvw4gSu4fgkHnIyrA0yGy0">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e2f71083c9de284190855cc42ffee5c8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://tp2.sinaimg.cn/1516632017/180/5721987710/1" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">z3jjlzt</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">时间轴</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/z3jjlzt" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/z3jjlzt " title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/z3jjlzt" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Hive/" style="font-size: 14px;">Hive</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/mapreduce/" style="font-size: 12px;">mapreduce</a> <a href="/tags/大数据/" style="font-size: 14px;">大数据</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/数据仓库/" style="font-size: 10px;">数据仓库</a> <a href="/tags/编程/" style="font-size: 10px;">编程</a> <a href="/tags/虚拟机/" style="font-size: 18px;">虚拟机</a> <a href="/tags/设计模式/" style="font-size: 16px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">z3jjlzt</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://tp2.sinaimg.cn/1516632017/180/5721987710/1" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">z3jjlzt</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">时间轴</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/z3jjlzt" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/z3jjlzt " title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/z3jjlzt" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-设计模式之工厂三兄弟（卷二）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/12/20/设计模式之工厂三兄弟（卷二）/" class="article-date">
+  	<time datetime="2017-12-20T11:33:47.000Z" itemprop="datePublished">2017-12-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      设计模式之工厂三兄弟（卷二）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>设计模式之工厂三兄弟。<br><a id="more"></a></p>
+<h2 id="0x00-为什么需要工厂模式"><a href="#0x00-为什么需要工厂模式" class="headerlink" title="0x00 为什么需要工厂模式"></a>0x00 为什么需要工厂模式</h2><blockquote>
+<p>使用工厂模式的目的是使得<code>对象的创建和使用分离</code>。一个对象的职责有三种，对象本身所具有的职责，创建对象的职责，使用对象的职责。</p>
+</blockquote>
+<h3 id="0x01-简单工厂模式"><a href="#0x01-简单工厂模式" class="headerlink" title="0x01 简单工厂模式"></a>0x01 简单工厂模式</h3><blockquote>
+<p>是其他两个工厂模式的基础。</p>
+</blockquote>
+<ol>
+<li>简单工厂定义：根据参数的不同返回不同的具体类的实例，创建的实例通常具有共同的父类。创建实例的方法是静态的，所以也叫静态工厂模式。</li>
+<li>优点：简化创建对象实例的步骤；使用配置文件，在不修改任何客户端代码的情况下更换和增加新具体产品类。</li>
+<li>缺点：系统扩展困难，一旦添加新产品就不得不修改工厂逻辑。如果具体产品类过多，会使得工厂类过于庞大。</li>
+<li>适用场景：工厂类负责的对象不多，不会造成工厂方法中的业务逻辑太过复杂。客户端不关心创建对象的过程。</li>
+</ol>
+<p>典型模板<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">XXXFactory</span> </span>&#123;  </span><br><span class="line">    <span class="comment">//静态工厂方法  </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Chart <span class="title">getChart</span><span class="params">(String type)</span> </span>&#123;  </span><br><span class="line">        XXX x = <span class="keyword">null</span>; <span class="comment">//XXX为父类 </span></span><br><span class="line">        <span class="keyword">if</span> (type.equals(<span class="string">"x1"</span>)) &#123;  </span><br><span class="line">            chart = <span class="keyword">new</span> XXX1();  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(<span class="string">"x2"</span>)) &#123;  </span><br><span class="line">            chart = <span class="keyword">new</span> XXX2();  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(<span class="string">"x3"</span>)) &#123;  </span><br><span class="line">            chart = <span class="keyword">new</span> XXX3();  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> chart;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="0x10-工厂方法模式"><a href="#0x10-工厂方法模式" class="headerlink" title="0x10 工厂方法模式"></a>0x10 工厂方法模式</h3><blockquote>
+<p>工厂方法模式中包含如下几个角色。</p>
+</blockquote>
+<ul>
+<li>Product（抽象产品）：它是定义产品的接口，是产品对象的公共父类。</li>
+<li>ConcreteProduct（具体产品）：它实现了抽象产品接口，<code>具体工厂和具体产品之间一一对应</code>。</li>
+<li>Factory（抽象工厂）：声明了工厂方法，用于返回一个产品。抽象工厂是工厂方法模式的核心。</li>
+<li>ConcreteFactory（具体工厂）：实现了抽象工厂中定义的工厂方法，由客户端调用，返回具体产品类的实例。</li>
+</ul>
+<p><img src="http://www.plantuml.com/plantuml/png/SoWkIImgAStDuSfBp4qjBaXCJbL8pi_LoyxErYimL51E1GE5QgxadCJYOWNddCpKl99ghbekg81ROd99Vb5bDPTsSb5gOabgG55-IcboYOQcLLb-PWg6EaTY5JeHL0WL1whBDKH8eiWvufDqGfC40fWZ5NHB2tHhx61kKR1wldlviyxz2Z05JZWLm2o6AO3oCHGuuL00iq51hxH0pmuQt31Dg89mn-eLPQPdbEZ1pN9Ki8A47CAvw4gSu4fgkHnIyrA0yGy0" alt=""></p>
+<ol>
+<li>优点：客户端无需知道具体产品类，只需知道具体工厂类；加入新产品时，无需改动原有代码，只要添加一个具体工厂和具体产品。</li>
+<li>缺点：加入新产品时，需要同时真假工厂和产品两个类，造成相识代码过多。</li>
+<li>适用场景：客户端不知道它所需要的对象的类。抽象工厂类通过其子类来指定创建哪个对象。</li>
+</ol>
+<h3 id="0x11-抽象工厂模式"><a href="#0x11-抽象工厂模式" class="headerlink" title="0x11 抽象工厂模式"></a>0x11 抽象工厂模式</h3><blockquote>
+<p>抽象工厂模式为<code>创建一组对象</code>提供了一种解决方案。而工厂方法是<code>创建一种产品</code>。</p>
+</blockquote>
+<ul>
+<li>在抽象工厂中声明了<code>多个工厂方法</code>，用于创建不同类型的产品，抽象工厂可以是接口，也可以是抽象类或者具体类。</li>
+<li>抽象工厂模式中，增加新的产品族很方便，但是增加新的产品等级结构很麻烦。</li>
+</ul>
+<p>(1) 产品等级结构：产品等级结构即产品的继承结构，如一个抽象类是电视机，其子类有海尔电视机、海信电视机、TCL电视机，则抽象电视机与具体品牌的电视机之间构成了一个产品等级结构，抽象电视机是父类，而具体品牌的电视机是其子类。<br>(2) 产品簇：在抽象工厂模式中，产品族是指由同一个工厂生产的，位于不同产品等级结构中的一组产品，如海尔电器工厂生产的海尔电视机、海尔电冰箱，海尔电视机位于电视机产品等级结构中，海尔电冰箱位于电冰箱产品等级结构中，海尔电视机、海尔电冰箱构成了一个产品族。</p>
+<p><img src="http://www.plantuml.com/plantuml/png/fPDB2i8m48RtEKN0ZI86scKNfHt1jLS8QT3I9sagIEq1F8c7SE5jz1gAxRJQ1mNDykERFpDvE9dcIkTHI68UoIpbGbAHH2m80fOQT2RVYnP4X3pBw3hqPQmBKf8QRBZGYJeMP2cKv5fkLUBbGhlpXNL8VA-30N6ttlqt07u8g1Emu6CgHCO0C_iC1j10ALIbXE3GT9MdgvEDCr3hSRtSppUA0emAJODe8EWhvgG2tHH0fJ7CKGDxfInFcLq_a6RpGGhVj3qEflpTNhEsLSEgBczSWQu2_HHpKe56AOaZO-_r7vu0" alt=""></p>
+<ol>
+<li>优点：增加新的产品族很方便。</li>
+<li>缺点：增加新的产品等级结构麻烦。</li>
+<li>适用场景：系统中有多于一个的产品族，而每次只使用其中某一产品族。产品等级结构稳定，设计完成之后，不会向系统中增加新的产品等级结构或者删除已有的产品等级结构。</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/12/23/设计模式之单例模式（卷三）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          设计模式之单例模式（卷三）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/18/类加载机制（卷一）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">类加载机制（卷一）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="设计模式之工厂三兄弟（卷二）" data-title="设计模式之工厂三兄弟（卷二）" data-url="http://z3jjlzt.github.io/2017/12/20/设计模式之工厂三兄弟（卷二）/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 z3jjlzt
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script>
+	var yiliaConfig = {
+		fancybox: false,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
