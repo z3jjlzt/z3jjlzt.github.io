@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://www.plantuml.com/plantuml/png/Iyv9B2vMS4mgBYbAJ2vnpaWiAgdcqax9B2x8IQpKqEIgvU9A1Yi1IndYaJF28-S24GUgA4w5MAA1OgL2IML1ggPLMNvc2jmGY3AGINdv9QaAIVab9VcvLgXErKDOoCK5SQ62Rb5cUaQ9ReqTgbA8j962Raf-UHw6h08NAbSNnTq0">
 <meta property="og:image" content="http://www.plantuml.com/plantuml/png/nP6n2i8m48RtFCM1YrgYwEZWKXmS145mZ_6ieKrIajEb-kv6AHfR50N1BBdB7V_b_yu8ZRuK4a5QFSZpV52Ee8Et0nMJXV0UPbgeOeLcYwvYYG_18ZnqKwkrDUd1azNeGDP1RtAqQXlrhUVBLqrdLezurgeO1nD-De4LEMMoa8eiPCeGIo138dH3VxkwlOT8DEXhXOOPNk2EU3-spc8V_50-L-4gOjeqnn_JV87egYisdfoG13Mi_s7woRQQh9tAziHFqxkn5kge1kpjaiuN">
 <meta property="og:image" content="http://www.plantuml.com/plantuml/png/oqlCJIqkI4nELKZEpzNBpixMAp1KK4u50uLghkISnE9Y1HUdq9BCd6ekxVJK4kVylBpKv9BC_3mDJQko_CmKhbekg3BdqkAI_DpK8XT7Vw3Qn9GKc012PLv-IQf2JcfQYPL2SMb1Qf4UcebSN5n8fYZebXRerjX1xLUmUhvx-RFE_GeW6_CmtMr4hhjzAuiBSyZnesufK8iLr1h2FWQfnlGmakse_hLIWFaN9KX0PkbgmIm5EWm0">
-<meta property="og:updated_time" content="2017-12-29T16:15:05.376Z">
+<meta property="og:updated_time" content="2018-01-04T14:04:22.109Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式概述（卷一）">
 <meta name="twitter:description" content="设计模式概述。">
@@ -217,7 +217,138 @@ var _hmt = _hmt || [];
 <h2 id="0x01-设计模式的分类"><a href="#0x01-设计模式的分类" class="headerlink" title="0x01 设计模式的分类"></a>0x01 设计模式的分类</h2><blockquote>
 <p>设计模式可分为创建型(Creational)6、结构型(Structural)、行为型(Behavioral)三种。</p>
 </blockquote>
-<p>设计模式一览表<br>模式类型|模式名称|使用频率<br>-|-|-<br>创建型|单例Singleton|常用<br>创建型|建造者Builder|常用<br>创建型|工厂方法Factory Method|常用<br>创建型|抽象工厂Abstract Factory|常用<br>创建型|简单工厂Simple Factory|<br>创建型|原型Prototype|<br>结构型|组合模式Composite|常用<br>结构型|装饰者Decorator|常用<br>结构型|代理Proxy|常用<br>结构型|外观Facade|常用<br>结构型|桥接Bridge|<br>结构型|享元Flyweight|<br>结构型|适配器Adapter Pattern|<br>行为型|迭代器Iterator|常用<br>行为型|观察者Obverser|常用<br>行为型|策略Strategy|常用<br>行为型|命令Command|常用<br>行为型|模板方法Template Method|常用<br>行为型|职责链Chain of Responsibility|<br>行为型|解释器Interpreter|<br>行为型|中介者Mediator|<br>行为型|备忘录Momento|<br>行为型|状态State|<br>行为型|访问者Visitor|</p>
+<p>设计模式一览表</p>
+<table>
+<thead>
+<tr>
+<th>模式类型</th>
+<th>模式名称</th>
+<th>使用频率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>创建型</td>
+<td>单例Singleton</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>创建型</td>
+<td>建造者Builder</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>创建型</td>
+<td>工厂方法Factory Method</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>创建型</td>
+<td>抽象工厂Abstract Factory</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>创建型</td>
+<td>简单工厂Simple Factory</td>
+<td></td>
+</tr>
+<tr>
+<td>创建型</td>
+<td>原型Prototype</td>
+<td></td>
+</tr>
+<tr>
+<td>结构型</td>
+<td>组合模式Composite</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>结构型</td>
+<td>装饰者Decorator</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>结构型</td>
+<td>代理Proxy</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>结构型</td>
+<td>外观Facade</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>结构型</td>
+<td>桥接Bridge</td>
+<td></td>
+</tr>
+<tr>
+<td>结构型</td>
+<td>享元Flyweight</td>
+<td></td>
+</tr>
+<tr>
+<td>结构型</td>
+<td>适配器Adapter Pattern</td>
+<td></td>
+</tr>
+<tr>
+<td>行为型</td>
+<td>迭代器Iterator</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>行为型</td>
+<td>观察者Obverser</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>行为型</td>
+<td>策略Strategy</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>行为型</td>
+<td>命令Command</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>行为型</td>
+<td>模板方法Template Method</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>行为型</td>
+<td>职责链Chain of Responsibility</td>
+<td></td>
+</tr>
+<tr>
+<td>行为型</td>
+<td>解释器Interpreter</td>
+<td></td>
+</tr>
+<tr>
+<td>行为型</td>
+<td>中介者Mediator</td>
+<td></td>
+</tr>
+<tr>
+<td>行为型</td>
+<td>备忘录Momento</td>
+<td></td>
+</tr>
+<tr>
+<td>行为型</td>
+<td>状态State</td>
+<td></td>
+</tr>
+<tr>
+<td>行为型</td>
+<td>访问者Visitor</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h2 id="0x10-学习设计模式要点"><a href="#0x10-学习设计模式要点" class="headerlink" title="0x10 学习设计模式要点"></a>0x10 学习设计模式要点</h2><blockquote>
 <p>模式是为了解决问题而产生的，不是用来创造问题的。</p>
 </blockquote>
@@ -368,7 +499,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 z3jjlzt
+    		&copy; 2018 z3jjlzt
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
