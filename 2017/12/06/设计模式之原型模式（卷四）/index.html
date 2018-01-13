@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="3oWUXzVhlUfeoSOjgRiOfaMRBeyWszShxl6s1ah0AHk" />
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>设计模式之原型模式（卷四） | z3jjlzt&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="设计模式之原型模式。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式之原型模式（卷四）">
+<meta property="og:url" content="http://z3jjlzt.github.io/2017/12/06/设计模式之原型模式（卷四）/index.html">
+<meta property="og:site_name" content="z3jjlzt's blog">
+<meta property="og:description" content="设计模式之原型模式。">
+<meta property="og:image" content="http://www.plantuml.com/plantuml/png/SoWkIImgAStDuSfBp4qjBaXCJbL8pi_LoyxErYimL51E1GE5QgxadCJYOeM0eloI_9BAWjHgBbr7XQBKD2xTu9AYpBnqXUAI8gvQBgWonse4spadFo_LFoahDRa4boQugGgwfGMw2euALWhFUXgVpUa4gKNIZv1-Eg7doOw69pjM0LKydRFXwTo6ftkcFf-o0jailQBCz8mIFMG7W7GkwNtQiOsBAo-_95KXAR-a93zN8JyDuJ45Bg2ZdlMqFvqm4SWmv4hDIr40gSNGWMmiYXuZX9vQBWSW6nYw0000">
+<meta property="og:image" content="http://www.plantuml.com/plantuml/png/TL1DYi8m5Dw_KpnmtK9Tkchn00gUeAslZhPDIl9S34NGbGvKqBspcmEuaZdGfESmIj68J5PVyltblL1ph7XP5Y3YadGLfuIfBFqyp_qgm1xT3zQG5h7ME5QI9NzML8CNeQ8Cl0chkPYXPWKhw6HHxU30kGmBAMYKB2Zb_n8U5UWjAmyZ763RRDhJrqth-3iwiFpVxzuS6ikRqzbyhzqCNyrd7-oxnTPWVlPcTu7eGTzZkbSGaWaJoInBbDbpPWJxnRRPciFHWW18JF6cVNEuPI-U_jEpWj1Yk_Wh">
+<meta property="og:updated_time" content="2018-01-13T02:46:08.861Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式之原型模式（卷四）">
+<meta name="twitter:description" content="设计模式之原型模式。">
+<meta name="twitter:image" content="http://www.plantuml.com/plantuml/png/SoWkIImgAStDuSfBp4qjBaXCJbL8pi_LoyxErYimL51E1GE5QgxadCJYOeM0eloI_9BAWjHgBbr7XQBKD2xTu9AYpBnqXUAI8gvQBgWonse4spadFo_LFoahDRa4boQugGgwfGMw2euALWhFUXgVpUa4gKNIZv1-Eg7doOw69pjM0LKydRFXwTo6ftkcFf-o0jailQBCz8mIFMG7W7GkwNtQiOsBAo-_95KXAR-a93zN8JyDuJ45Bg2ZdlMqFvqm4SWmv4hDIr40gSNGWMmiYXuZX9vQBWSW6nYw0000">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e2f71083c9de284190855cc42ffee5c8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://tp2.sinaimg.cn/1516632017/180/5721987710/1" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">z3jjlzt</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">时间轴</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/z3jjlzt" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/z3jjlzt " title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/z3jjlzt" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/android/" style="font-size: 14px;">android</a> <a href="/tags/hive/" style="font-size: 14px;">hive</a> <a href="/tags/java/" style="font-size: 18px;">java</a> <a href="/tags/mapreduce/" style="font-size: 12px;">mapreduce</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/大数据/" style="font-size: 14px;">大数据</a> <a href="/tags/数据仓库/" style="font-size: 10px;">数据仓库</a> <a href="/tags/虚拟机/" style="font-size: 16px;">虚拟机</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">z3jjlzt</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://tp2.sinaimg.cn/1516632017/180/5721987710/1" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">z3jjlzt</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">时间轴</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/z3jjlzt" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/z3jjlzt " title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/z3jjlzt" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-设计模式之原型模式（卷四）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/12/06/设计模式之原型模式（卷四）/" class="article-date">
+  	<time datetime="2017-12-06T11:33:47.000Z" itemprop="datePublished">2017-12-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      设计模式之原型模式（卷四）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>设计模式之原型模式。<br><a id="more"></a></p>
+<h2 id="0x00-原型模式概述"><a href="#0x00-原型模式概述" class="headerlink" title="0x00 原型模式概述"></a>0x00 原型模式概述</h2><blockquote>
+<p>通过一个原型对象，创建（clone）出多个相似的其他对象。常见的有浅克隆（Cloneable）和深克隆（ Serializable）。浅克隆和深克隆的主要<code>区别在于是否支持引用类型的成员变量的复制</code>，下面将对两者进行详细介绍。</p>
+</blockquote>
+<h2 id="0x01-浅克隆"><a href="#0x01-浅克隆" class="headerlink" title="0x01 浅克隆"></a>0x01 浅克隆</h2><blockquote>
+<p>浅克隆示意图如下。<br><img src="http://www.plantuml.com/plantuml/png/SoWkIImgAStDuSfBp4qjBaXCJbL8pi_LoyxErYimL51E1GE5QgxadCJYOeM0eloI_9BAWjHgBbr7XQBKD2xTu9AYpBnqXUAI8gvQBgWonse4spadFo_LFoahDRa4boQugGgwfGMw2euALWhFUXgVpUa4gKNIZv1-Eg7doOw69pjM0LKydRFXwTo6ftkcFf-o0jailQBCz8mIFMG7W7GkwNtQiOsBAo-_95KXAR-a93zN8JyDuJ45Bg2ZdlMqFvqm4SWmv4hDIr40gSNGWMmiYXuZX9vQBWSW6nYw0000" alt=""></p>
+</blockquote>
+<h2 id="0x10-深克隆"><a href="#0x10-深克隆" class="headerlink" title="0x10 深克隆"></a>0x10 深克隆</h2><blockquote>
+<p>在深克隆中，除了对象本身被复制外，对象所包含的所有成员变量（包含引用类型的变量）也将复制。<br><img src="http://www.plantuml.com/plantuml/png/TL1DYi8m5Dw_KpnmtK9Tkchn00gUeAslZhPDIl9S34NGbGvKqBspcmEuaZdGfESmIj68J5PVyltblL1ph7XP5Y3YadGLfuIfBFqyp_qgm1xT3zQG5h7ME5QI9NzML8CNeQ8Cl0chkPYXPWKhw6HHxU30kGmBAMYKB2Zb_n8U5UWjAmyZ763RRDhJrqth-3iwiFpVxzuS6ikRqzbyhzqCNyrd7-oxnTPWVlPcTu7eGTzZkbSGaWaJoInBbDbpPWJxnRRPciFHWW18JF6cVNEuPI-U_jEpWj1Yk_Wh" alt=""></p>
+</blockquote>
+<h2 id="0x11-总结"><a href="#0x11-总结" class="headerlink" title="0x11 总结"></a>0x11 总结</h2><ol>
+<li>优点：当创建对象实例较为复杂时，可以简化对象创建的过程；使用深克隆保存对象状态，便于恢复操作。</li>
+<li>缺点：克隆方法位于类内部，修改会违背开闭原则。深克隆方法编写较为复杂。</li>
+<li>适用场景：新的实例可以通过原型对象复制获得，如果是相似对象，对其成员变量稍作修改。</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/12/08/设计模式之生成器模式（卷五）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          设计模式之生成器模式（卷五）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/04/设计模式之单例模式（卷三）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">设计模式之单例模式（卷三）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="设计模式之原型模式（卷四）" data-title="设计模式之原型模式（卷四）" data-url="http://z3jjlzt.github.io/2017/12/06/设计模式之原型模式（卷四）/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 z3jjlzt
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script>
+	var yiliaConfig = {
+		fancybox: false,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

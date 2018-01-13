@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="3oWUXzVhlUfeoSOjgRiOfaMRBeyWszShxl6s1ah0AHk" />
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>设计模式之装饰者模式（卷九） | z3jjlzt&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="装饰者模式详解。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式之装饰者模式（卷九）">
+<meta property="og:url" content="http://z3jjlzt.github.io/2017/12/12/设计模式之装饰者模式（卷九）/index.html">
+<meta property="og:site_name" content="z3jjlzt's blog">
+<meta property="og:description" content="装饰者模式详解。">
+<meta property="og:image" content="http://www.plantuml.com/plantuml/png/bPD1Jy8m68Rl_HLDl6Xq95uv653l_eOngX3Okcp5ooGXmamqAWSC4KF0H8Z4A792moJ-6DTjdFmBTiDjmDp1tVhrVR_lwTikfH9U8IMn22HUHAhC2mWAM4mK2eM4l0tNaFT13GX5NbNXNZ6F9AA1Cl0BM9InvDKqFgCIXHT86HxZV1PY6IaymShwng9S4XH4q89jCzGbNHyJIvWWcC64O17YmwW9qFOWKZJVNxPe_OaEE_RroEhKJ6DijIkqEx7Qp_PTZLvqdUeK82aBtVO-q3uIi3TT0rpG2WgnL4h-A4TSgC3emWGB1i5c-TxlZykPSUiCUyweQjyCXCJlnbVbD1ua_KSa72Ovf1n4a5QJ2fkuL5H_CwSDvq6VzKTEHMTiBb2hPqxEva1gYNNqeHJQQx9zMdyrZVwinGAxf_hOD9fMuygSjfUPLw5t_mCzVqIGyxBaJdR2HvISpu8WShkGAybBKfYqZKVh_1E2029M0q9DsXU5BbyK7YPU0nb_YiN0VfWV">
+<meta property="og:updated_time" content="2018-01-13T02:39:08.021Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式之装饰者模式（卷九）">
+<meta name="twitter:description" content="装饰者模式详解。">
+<meta name="twitter:image" content="http://www.plantuml.com/plantuml/png/bPD1Jy8m68Rl_HLDl6Xq95uv653l_eOngX3Okcp5ooGXmamqAWSC4KF0H8Z4A792moJ-6DTjdFmBTiDjmDp1tVhrVR_lwTikfH9U8IMn22HUHAhC2mWAM4mK2eM4l0tNaFT13GX5NbNXNZ6F9AA1Cl0BM9InvDKqFgCIXHT86HxZV1PY6IaymShwng9S4XH4q89jCzGbNHyJIvWWcC64O17YmwW9qFOWKZJVNxPe_OaEE_RroEhKJ6DijIkqEx7Qp_PTZLvqdUeK82aBtVO-q3uIi3TT0rpG2WgnL4h-A4TSgC3emWGB1i5c-TxlZykPSUiCUyweQjyCXCJlnbVbD1ua_KSa72Ovf1n4a5QJ2fkuL5H_CwSDvq6VzKTEHMTiBb2hPqxEva1gYNNqeHJQQx9zMdyrZVwinGAxf_hOD9fMuygSjfUPLw5t_mCzVqIGyxBaJdR2HvISpu8WShkGAybBKfYqZKVh_1E2029M0q9DsXU5BbyK7YPU0nb_YiN0VfWV">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e2f71083c9de284190855cc42ffee5c8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://tp2.sinaimg.cn/1516632017/180/5721987710/1" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">z3jjlzt</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">时间轴</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/z3jjlzt" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/z3jjlzt " title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/z3jjlzt" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/android/" style="font-size: 14px;">android</a> <a href="/tags/hive/" style="font-size: 14px;">hive</a> <a href="/tags/java/" style="font-size: 18px;">java</a> <a href="/tags/mapreduce/" style="font-size: 12px;">mapreduce</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/大数据/" style="font-size: 14px;">大数据</a> <a href="/tags/数据仓库/" style="font-size: 10px;">数据仓库</a> <a href="/tags/虚拟机/" style="font-size: 16px;">虚拟机</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">z3jjlzt</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://tp2.sinaimg.cn/1516632017/180/5721987710/1" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">z3jjlzt</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">时间轴</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/z3jjlzt" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/z3jjlzt " title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/z3jjlzt" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-设计模式之装饰者模式（卷九）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/12/12/设计模式之装饰者模式（卷九）/" class="article-date">
+  	<time datetime="2017-12-12T11:33:47.000Z" itemprop="datePublished">2017-12-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      设计模式之装饰者模式（卷九）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>装饰者模式详解。<br><a id="more"></a></p>
+<h2 id="0x00-装饰者模式定义"><a href="#0x00-装饰者模式定义" class="headerlink" title="0x00 装饰者模式定义"></a>0x00 装饰者模式定义</h2><blockquote>
+<p>在不改变基础对象原有功能之上为其动态添加新的功能。</p>
+</blockquote>
+<h2 id="0x01-组成部分"><a href="#0x01-组成部分" class="headerlink" title="0x01 组成部分"></a>0x01 组成部分</h2><ul>
+<li>Component：抽象构件，客户端直接面向它编程。</li>
+<li>Concretecomponent：具体构件，实现了最基础的功能。</li>
+<li>Decorator：抽象装饰者，持有一个抽象构件的引用。</li>
+<li>ConcreteDecorator；具体装饰类，为构件动态添加新功能。</li>
+</ul>
+<p><img src="http://www.plantuml.com/plantuml/png/bPD1Jy8m68Rl_HLDl6Xq95uv653l_eOngX3Okcp5ooGXmamqAWSC4KF0H8Z4A792moJ-6DTjdFmBTiDjmDp1tVhrVR_lwTikfH9U8IMn22HUHAhC2mWAM4mK2eM4l0tNaFT13GX5NbNXNZ6F9AA1Cl0BM9InvDKqFgCIXHT86HxZV1PY6IaymShwng9S4XH4q89jCzGbNHyJIvWWcC64O17YmwW9qFOWKZJVNxPe_OaEE_RroEhKJ6DijIkqEx7Qp_PTZLvqdUeK82aBtVO-q3uIi3TT0rpG2WgnL4h-A4TSgC3emWGB1i5c-TxlZykPSUiCUyweQjyCXCJlnbVbD1ua_KSa72Ovf1n4a5QJ2fkuL5H_CwSDvq6VzKTEHMTiBb2hPqxEva1gYNNqeHJQQx9zMdyrZVwinGAxf_hOD9fMuygSjfUPLw5t_mCzVqIGyxBaJdR2HvISpu8WShkGAybBKfYqZKVh_1E2029M0q9DsXU5BbyK7YPU0nb_YiN0VfWV" alt=""></p>
+<h2 id="0x10-具体案例"><a href="#0x10-具体案例" class="headerlink" title="0x10 具体案例"></a>0x10 具体案例</h2><blockquote>
+<p>在Java中，如IO流中，就大量使用了装饰者模式，现在举一个MOBA游戏的例子。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kkk.pattern.Decorator1;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 抽象构件</span><br><span class="line"> * Created by z3jjlzt on 2018/1/9.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">operator</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 具体构件</span><br><span class="line"> * Created by z3jjlzt on 2018/1/9.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteComponent</span> <span class="keyword">extends</span> <span class="title">Component</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"多兰之剑"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 抽象装饰者</span><br><span class="line"> * Created by z3jjlzt on 2018/1/9.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Decorator</span> <span class="keyword">extends</span> <span class="title">Component</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Component component;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Decorator</span><span class="params">(Component component)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.component = component;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        component.operator();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 具体装饰者</span><br><span class="line"> * Created by z3jjlzt on 2018/1/9.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Damage</span> <span class="keyword">extends</span> <span class="title">Decorator</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Damage</span><span class="params">(Component component)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(component);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.operator();</span><br><span class="line">        System.out.println(<span class="string">" 加上暴风大剑"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 具体装饰者</span><br><span class="line"> * Created by z3jjlzt on 2018/1/9.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Crit</span> <span class="keyword">extends</span> <span class="title">Decorator</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Crit</span><span class="params">(Component component)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(component);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.operator();</span><br><span class="line">        System.out.println(<span class="string">" 加上无尽之刃"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 客户端，面向抽象构件编程。</span><br><span class="line"> * Created by z3jjlzt on 2018/1/9.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Component c1,c2,c3;</span><br><span class="line">        c1 = <span class="keyword">new</span> ConcreteComponent();</span><br><span class="line">        c2 = <span class="keyword">new</span> Damage(c1);</span><br><span class="line">        c3 = <span class="keyword">new</span> Crit(c2);</span><br><span class="line">        c2.operator();</span><br><span class="line">        c3.operator();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">执行结果：</span><br><span class="line">多兰之剑</span><br><span class="line"> 加上暴风大剑</span><br><span class="line">多兰之剑</span><br><span class="line"> 加上暴风大剑</span><br><span class="line"> 加上无尽之刃</span><br></pre></td></tr></table></figure>
+<h2 id="0x11-模式的分类"><a href="#0x11-模式的分类" class="headerlink" title="0x11 模式的分类"></a>0x11 模式的分类</h2><p>重客户端的角度分析，可以分为两类，透明方式以及班透明方式。在透明方式中，客户端对待具体构件和具体装饰者没有任何区别；而在半透明方式中，客户端需要区别对待，以达到能够独立调用具体类中新增的方法的目的。在大多数情况下，应该使用透明方式，符合面向抽象编程的原则。</p>
+<h2 id="0xff-总结"><a href="#0xff-总结" class="headerlink" title="0xff 总结"></a>0xff 总结</h2><ul>
+<li>优点：对于扩展新功能，比继承更为灵活，可以对一对象多次装饰，组合出更加强大的对象。</li>
+<li>缺点：产生过多小对象，排错更加繁杂。</li>
+<li>适用场景：在不影响其他对象的情况下，以动态、透明的方式给单个对象添加职责。</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/12/14/设计模式之外观模式（卷十）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          设计模式之外观模式（卷十）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/11/设计模式之组合模式（卷八）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">设计模式之组合模式（卷八）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="设计模式之装饰者模式（卷九）" data-title="设计模式之装饰者模式（卷九）" data-url="http://z3jjlzt.github.io/2017/12/12/设计模式之装饰者模式（卷九）/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 z3jjlzt
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script>
+	var yiliaConfig = {
+		fancybox: false,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -13,12 +13,10 @@
 <meta property="og:url" content="http://z3jjlzt.github.io/2016/04/19/java同步原理/index.html">
 <meta property="og:site_name" content="z3jjlzt's blog">
 <meta property="og:description" content="生产者与消费者问题。">
-<meta property="og:image" content="http://7xstjj.com1.z0.glb.clouddn.com/1.jpg">
-<meta property="og:updated_time" content="2018-01-04T14:06:12.245Z">
+<meta property="og:updated_time" content="2018-01-13T02:28:07.746Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java同步原理">
 <meta name="twitter:description" content="生产者与消费者问题。">
-<meta name="twitter:image" content="http://7xstjj.com1.z0.glb.clouddn.com/1.jpg">
   
   
     <link rel="icon" href="/favicon.png">
@@ -111,7 +109,7 @@ var _hmt = _hmt || [];
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/android/" style="font-size: 14px;">android</a> <a href="/tags/hive/" style="font-size: 14px;">hive</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/mapreduce/" style="font-size: 12px;">mapreduce</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/大数据/" style="font-size: 14px;">大数据</a> <a href="/tags/数据仓库/" style="font-size: 10px;">数据仓库</a> <a href="/tags/虚拟机/" style="font-size: 18px;">虚拟机</a> <a href="/tags/设计模式/" style="font-size: 16px;">设计模式</a>
+						<a href="/tags/android/" style="font-size: 14px;">android</a> <a href="/tags/hive/" style="font-size: 14px;">hive</a> <a href="/tags/java/" style="font-size: 18px;">java</a> <a href="/tags/mapreduce/" style="font-size: 12px;">mapreduce</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/大数据/" style="font-size: 14px;">大数据</a> <a href="/tags/数据仓库/" style="font-size: 10px;">数据仓库</a> <a href="/tags/虚拟机/" style="font-size: 16px;">虚拟机</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
 					</div>
 				</section>
 				
@@ -202,7 +200,7 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://7xstjj.com1.z0.glb.clouddn.com/1.jpg" alt=""><br>生产者与消费者问题。<br><a id="more"></a></p>
+        <p>生产者与消费者问题。<br><a id="more"></a></p>
 <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><blockquote>
 <p>在 Java 中可以用 wait、notify 和 notifyAll 来实现线程间的通信。<br> obj.wait()方法使本线程挂起，并释放obj对象的monitor，只有<strong><em>其他线程</em></strong>调用obj对象的notify()或notifyAll()时，才可以被唤醒。obj.notifyAll()方法唤醒所有阻塞在obj对象上的沉睡线程，然后<strong><em>被唤醒的众多线程竞争</em></strong>obj对象的monitor占有权，最终得到的那个线程会继续执行下去，但其他线程继续等待。obj.notify()方法是随机唤醒一个沉睡线程。</p>
 </blockquote>
@@ -255,11 +253,11 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/04/22/设计模式之单例模式/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/04/22/android Binder跨进程 AIDL使用/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          设计模式之单例模式
+          android Binder跨进程 AIDL使用
         
       </div>
     </a>

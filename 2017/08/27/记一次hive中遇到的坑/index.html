@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="3oWUXzVhlUfeoSOjgRiOfaMRBeyWszShxl6s1ah0AHk" />
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>记一次hive中遇到的坑 | z3jjlzt&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="hive中自动类型转换所引发的数据倾斜。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次hive中遇到的坑">
+<meta property="og:url" content="http://z3jjlzt.github.io/2017/08/27/记一次hive中遇到的坑/index.html">
+<meta property="og:site_name" content="z3jjlzt's blog">
+<meta property="og:description" content="hive中自动类型转换所引发的数据倾斜。">
+<meta property="og:updated_time" content="2018-01-13T02:57:52.695Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="记一次hive中遇到的坑">
+<meta name="twitter:description" content="hive中自动类型转换所引发的数据倾斜。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e2f71083c9de284190855cc42ffee5c8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://tp2.sinaimg.cn/1516632017/180/5721987710/1" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">z3jjlzt</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">时间轴</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/z3jjlzt" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/z3jjlzt " title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/z3jjlzt" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/android/" style="font-size: 14px;">android</a> <a href="/tags/hive/" style="font-size: 14px;">hive</a> <a href="/tags/java/" style="font-size: 18px;">java</a> <a href="/tags/mapreduce/" style="font-size: 12px;">mapreduce</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/大数据/" style="font-size: 14px;">大数据</a> <a href="/tags/数据仓库/" style="font-size: 10px;">数据仓库</a> <a href="/tags/虚拟机/" style="font-size: 16px;">虚拟机</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">z3jjlzt</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://tp2.sinaimg.cn/1516632017/180/5721987710/1" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">z3jjlzt</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">时间轴</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/z3jjlzt" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/z3jjlzt " title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/z3jjlzt" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-记一次hive中遇到的坑" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/08/27/记一次hive中遇到的坑/" class="article-date">
+  	<time datetime="2017-08-27T11:33:47.000Z" itemprop="datePublished">2017-08-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      记一次hive中遇到的坑
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hive/">hive</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据仓库/">数据仓库</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>hive中自动类型转换所引发的数据倾斜。<br><a id="more"></a></p>
+<h1 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h1><blockquote>
+<p>今天，由于公司要进行新老数据仓库的迁移，于是顺便接手了其中一部分的工作，其实大部分迁移工作都比较简单，就是把从ods层-dw层-dm层-sh展示层中涉及到旧仓库的表替换成新仓库的表，并且检查其中字段的差异性，并进行相应的操作。于是撸起袖子开工。</p>
+</blockquote>
+<h1 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h1><ol>
+<li>前期的进展很顺利，很快就完成了几张表的迁移，心想着按这个进度，不到一个小时就能完成了。Orz</li>
+<li>在进行到第五张表的迁移时，发现很久没有完成，于是检查了日志，发现卡在了reduce阶段，从60%作用开始，基本上每隔10分钟左右进度才增加1%。</li>
+<li>遇到这种情况，第一反应就是发生了数据倾斜，于是马上进行数据源的排查，在这里先说明一下查询语句主体，大致如下<code>select xxx from t1 left join on t2 where t1.sid = t2.sid left join t3 on t1.uid = t3.uid</code>。其中t2和t3均已经进行了去重和选定分区的处理。</li>
+<li>t1以及t2的数据量在百万级别，t3在亿级别作用。然后对t1进行了count(distinct uid)后，发现了异常数据 null的量在千万级别，于是采取了直接剔除null的解决方案，心想这个应该就不会进行数据倾斜了，于是再次运行脚本，然后等待，结果出乎我的意料，这次没有卡在60%，而是卡在了65%，泪崩啊。</li>
+<li>再次检查日志，发现reduce个数只有一个，心想大概是hive自动判断reduce个数不准确，于是手动强制设定了reduce的个数<code>set mapred.reduce.tasks=800;</code>。再一次运行，等待，60%–70%–80%–90%–95%…，这下终于正常了。…99%–99%–99%–99%…，在看到一连串的99%不断刷新的同时，我终于接受了还有错误的事实。</li>
+<li>到底哪里出错了呢，按说数据量也并不是特别大呀，想了想，还有一个办法，就是使用<code>hive.groupby.skewindata=true;</code>来进行当有数据倾斜时进行负载均衡，其实理性告诉我，和这个关系不大，但是没办法了呀，只能试一下了。结果不出我所料，还是卡在了99%。</li>
+<li>还有半小时就到饭点了，怎么办，这时候同事对我随口提了一句，检查一下数据类型，说不定是数据类型不一致造成的呢。”不应该呀”，我嘀咕着，抱着死马当活马医的态度，我看了一些表结构，发现还真不一样，t1的是bigint，而t2和t3的是string。但是我记得hive有自动隐式转换机制的呀，为了验证我的观点，我进行了<code>select cast(1010000001000390061 as bigint) = cast(1010000001000390061 as string)</code>查询，结果就是返回true，应该不是这个原因。是的。</li>
+<li>但是也想不到别的办法了，于是再去吃饭之前，我还是提交了这个微小的改动，<code>cast(t1.sid as string) = t2.sid</code>,在吃饭的过程中，我一直在想解决的办法，吃完饭回来，奇迹发生了，居然就是这个原因！！！</li>
+<li>突然想起来，之前有过一次，好像也是数据类型的原因，在使用join时，对两个bigint类型和string类型进行等值操作时，乍一看，操作没问题，可是仔细一看，返回的数据不对啊。当时也没注意这个细节。</li>
+<li>难道是超出了bigint范围？在查询了<code>select cast(10010000001000390061 as bigint)</code>后，惊奇的发现居然返回了9223372036854775807，这下明白了，应该是在join时，由于t3的uid字段超出了bigint的范围，从而使得最后的连接后数据量剧增，想一下，百万 <em> 百万 </em> 亿 ，大概有10的20次方，难怪卡在了99%。<h1 id="0xff"><a href="#0xff" class="headerlink" title="0xff"></a>0xff</h1></li>
+</ol>
+<ul>
+<li>回顾这一次填坑之旅，不仅意识到了不能完全依赖于平台提供的便利功能，而疏忽了其背后原理性的东西。如自动转换类型的原理，以及相关的限制。</li>
+<li>对于不同层的表的维度字段的定义，尽量保证维度字段的类型保持一致，不然有可能会出现一些奇怪的问题，比如我这次遇到的由于超出范围而造成自动转换的结果不准确的bug。</li>
+<li>在遇到问题迟迟不能解决的时候，不妨问问身边的人，俗话说的好，当局者迷，旁观者清嘛。Orz</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/29/Hive针对distinct的优化(二)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Hive针对distinct的优化(二)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/26/Hive针对distinct的优化/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hive针对distinct的优化</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="记一次hive中遇到的坑" data-title="记一次hive中遇到的坑" data-url="http://z3jjlzt.github.io/2017/08/27/记一次hive中遇到的坑/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 z3jjlzt
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script>
+	var yiliaConfig = {
+		fancybox: false,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
