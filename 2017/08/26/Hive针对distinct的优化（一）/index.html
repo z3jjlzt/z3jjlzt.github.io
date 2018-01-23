@@ -5,21 +5,18 @@
   <meta name="google-site-verification" content="3oWUXzVhlUfeoSOjgRiOfaMRBeyWszShxl6s1ah0AHk" />
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>设计模式之原型模式（卷四） | z3jjlzt&#39;s blog</title>
+  <title>Hive针对distinct的优化（一） | z3jjlzt&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="设计模式之原型模式。">
+  <meta name="description" content="hive针对count(distinct xxx)只产生一个reduce的优化。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式之原型模式（卷四）">
-<meta property="og:url" content="http://z3jjlzt.github.io/2017/12/06/设计模式之原型模式（卷四）/index.html">
+<meta property="og:title" content="Hive针对distinct的优化（一）">
+<meta property="og:url" content="http://z3jjlzt.github.io/2017/08/26/Hive针对distinct的优化（一）/index.html">
 <meta property="og:site_name" content="z3jjlzt's blog">
-<meta property="og:description" content="设计模式之原型模式。">
-<meta property="og:image" content="http://www.plantuml.com/plantuml/png/SoWkIImgAStDuSfBp4qjBaXCJbL8pi_LoyxErYimL51E1GE5QgxadCJYOeM0eloI_9BAWjHgBbr7XQBKD2xTu9AYpBnqXUAI8gvQBgWonse4spadFo_LFoahDRa4boQugGgwfGMw2euALWhFUXgVpUa4gKNIZv1-Eg7doOw69pjM0LKydRFXwTo6ftkcFf-o0jailQBCz8mIFMG7W7GkwNtQiOsBAo-_95KXAR-a93zN8JyDuJ45Bg2ZdlMqFvqm4SWmv4hDIr40gSNGWMmiYXuZX9vQBWSW6nYw0000">
-<meta property="og:image" content="http://www.plantuml.com/plantuml/png/TL1DYi8m5Dw_KpnmtK9Tkchn00gUeAslZhPDIl9S34NGbGvKqBspcmEuaZdGfESmIj68J5PVyltblL1ph7XP5Y3YadGLfuIfBFqyp_qgm1xT3zQG5h7ME5QI9NzML8CNeQ8Cl0chkPYXPWKhw6HHxU30kGmBAMYKB2Zb_n8U5UWjAmyZ763RRDhJrqth-3iwiFpVxzuS6ikRqzbyhzqCNyrd7-oxnTPWVlPcTu7eGTzZkbSGaWaJoInBbDbpPWJxnRRPciFHWW18JF6cVNEuPI-U_jEpWj1Yk_Wh">
-<meta property="og:updated_time" content="2018-01-13T02:46:08.861Z">
+<meta property="og:description" content="hive针对count(distinct xxx)只产生一个reduce的优化。">
+<meta property="og:updated_time" content="2018-01-13T03:00:26.773Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设计模式之原型模式（卷四）">
-<meta name="twitter:description" content="设计模式之原型模式。">
-<meta name="twitter:image" content="http://www.plantuml.com/plantuml/png/SoWkIImgAStDuSfBp4qjBaXCJbL8pi_LoyxErYimL51E1GE5QgxadCJYOeM0eloI_9BAWjHgBbr7XQBKD2xTu9AYpBnqXUAI8gvQBgWonse4spadFo_LFoahDRa4boQugGgwfGMw2euALWhFUXgVpUa4gKNIZv1-Eg7doOw69pjM0LKydRFXwTo6ftkcFf-o0jailQBCz8mIFMG7W7GkwNtQiOsBAo-_95KXAR-a93zN8JyDuJ45Bg2ZdlMqFvqm4SWmv4hDIr40gSNGWMmiYXuZX9vQBWSW6nYw0000">
+<meta name="twitter:title" content="Hive针对distinct的优化（一）">
+<meta name="twitter:description" content="hive针对count(distinct xxx)只产生一个reduce的优化。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -168,11 +165,11 @@ var _hmt = _hmt || [];
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-设计模式之原型模式（卷四）" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Hive针对distinct的优化（一）" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/12/06/设计模式之原型模式（卷四）/" class="article-date">
-  	<time datetime="2017-12-06T11:33:47.000Z" itemprop="datePublished">2017-12-06</time>
+      <a href="/2017/08/26/Hive针对distinct的优化（一）/" class="article-date">
+  	<time datetime="2017-08-26T11:33:47.000Z" itemprop="datePublished">2017-08-26</time>
 </a>
     </div>
   
@@ -183,7 +180,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      设计模式之原型模式（卷四）
+      Hive针对distinct的优化（一）
     </h1>
   
 
@@ -192,7 +189,7 @@ var _hmt = _hmt || [];
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hive/">hive</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mapreduce/">mapreduce</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li></ul>
 	</div>
 
         
@@ -203,21 +200,25 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>设计模式之原型模式。<br><a id="more"></a></p>
-<h2 id="0x00-原型模式概述"><a href="#0x00-原型模式概述" class="headerlink" title="0x00 原型模式概述"></a>0x00 原型模式概述</h2><blockquote>
-<p>通过一个原型对象，创建（clone）出多个相似的其他对象。常见的有浅克隆（Cloneable）和深克隆（ Serializable）。浅克隆和深克隆的主要<code>区别在于是否支持引用类型的成员变量的复制</code>，下面将对两者进行详细介绍。</p>
+        <p>hive针对count(distinct xxx)只产生一个reduce的优化。<br><a id="more"></a></p>
+<h2 id="0x00-造成的原因"><a href="#0x00-造成的原因" class="headerlink" title="0x00 造成的原因"></a>0x00 造成的原因</h2><blockquote>
+<p>由于使用了distinct，导致在map端的combine无法合并重复数据；对于这种count()全聚合操作时，即使设定了reduce task个数，set mapred.reduce.tasks=100；hive也只会启动一个reducer。这就造成了所有map端传来的数据都在一个tasks中执行，成为了性能瓶颈。</p>
 </blockquote>
-<h2 id="0x01-浅克隆"><a href="#0x01-浅克隆" class="headerlink" title="0x01 浅克隆"></a>0x01 浅克隆</h2><blockquote>
-<p>浅克隆示意图如下。<br><img src="http://www.plantuml.com/plantuml/png/SoWkIImgAStDuSfBp4qjBaXCJbL8pi_LoyxErYimL51E1GE5QgxadCJYOeM0eloI_9BAWjHgBbr7XQBKD2xTu9AYpBnqXUAI8gvQBgWonse4spadFo_LFoahDRa4boQugGgwfGMw2euALWhFUXgVpUa4gKNIZv1-Eg7doOw69pjM0LKydRFXwTo6ftkcFf-o0jailQBCz8mIFMG7W7GkwNtQiOsBAo-_95KXAR-a93zN8JyDuJ45Bg2ZdlMqFvqm4SWmv4hDIr40gSNGWMmiYXuZX9vQBWSW6nYw0000" alt=""></p>
+<h2 id="0x01-解决方式一（分治法）"><a href="#0x01-解决方式一（分治法）" class="headerlink" title="0x01 解决方式一（分治法）"></a>0x01 解决方式一（分治法）</h2><blockquote>
+<p>该方法优势在于使用不同的reducer各自进行COUNT(DISTINCT)计算，充分发挥hadoop的优势，然后进行求和，间接达到了效果。需要注意的是多个tasks同时计算产生重复值的问题，所以分组需要使用到目标列的子串。</p>
 </blockquote>
-<h2 id="0x10-深克隆"><a href="#0x10-深克隆" class="headerlink" title="0x10 深克隆"></a>0x10 深克隆</h2><blockquote>
-<p>在深克隆中，除了对象本身被复制外，对象所包含的所有成员变量（包含引用类型的变量）也将复制。<br><img src="http://www.plantuml.com/plantuml/png/TL1DYi8m5Dw_KpnmtK9Tkchn00gUeAslZhPDIl9S34NGbGvKqBspcmEuaZdGfESmIj68J5PVyltblL1ph7XP5Y3YadGLfuIfBFqyp_qgm1xT3zQG5h7ME5QI9NzML8CNeQ8Cl0chkPYXPWKhw6HHxU30kGmBAMYKB2Zb_n8U5UWjAmyZ763RRDhJrqth-3iwiFpVxzuS6ikRqzbyhzqCNyrd7-oxnTPWVlPcTu7eGTzZkbSGaWaJoInBbDbpPWJxnRRPciFHWW18JF6cVNEuPI-U_jEpWj1Yk_Wh" alt=""></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">    <span class="keyword">SUM</span>(tmp_num) total</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    (<span class="keyword">select</span></span><br><span class="line">        <span class="keyword">substr</span>(uid,<span class="number">1</span>,<span class="number">4</span>) tag,</span><br><span class="line">        <span class="keyword">count</span>(<span class="keyword">distinct</span> <span class="keyword">substr</span>(uid,<span class="number">5</span>)) tmp_total</span><br><span class="line">    <span class="keyword">from</span></span><br><span class="line">        xxtable</span><br><span class="line">    <span class="keyword">group</span> <span class="keyword">by</span></span><br><span class="line">        <span class="keyword">substr</span>(uid,<span class="number">1</span>,<span class="number">4</span>)</span><br><span class="line">    )t1</span><br></pre></td></tr></table></figure>
+<p>经过验证，该方法在5000万数据量的情况下，不优化需要5分钟，经过优化需要3分钟，还是有一定的提升的。</p>
+<h2 id="0x10-解决方式二（随机分组法）"><a href="#0x10-解决方式二（随机分组法）" class="headerlink" title="0x10 解决方式二（随机分组法）"></a>0x10 解决方式二（随机分组法）</h2><blockquote>
+<p>核心是使用group by替代count(distinct)。</p>
 </blockquote>
-<h2 id="0x11-总结"><a href="#0x11-总结" class="headerlink" title="0x11 总结"></a>0x11 总结</h2><ol>
-<li>优点：当创建对象实例较为复杂时，可以简化对象创建的过程；使用深克隆保存对象状态，便于恢复操作。</li>
-<li>缺点：克隆方法位于类内部，修改会违背开闭原则。深克隆方法编写较为复杂。</li>
-<li>适用场景：新的实例可以通过原型对象复制获得，如果是相似对象，对其成员变量稍作修改。</li>
-</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span><span class="comment">--3</span></span><br><span class="line">    <span class="keyword">SUM</span>(tc) </span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    (<span class="keyword">select</span><span class="comment">--2 </span></span><br><span class="line">        <span class="keyword">count</span>(*) tc,</span><br><span class="line">        tag  </span><br><span class="line">    <span class="keyword">from</span> </span><br><span class="line">        (<span class="keyword">select</span><span class="comment">--1</span></span><br><span class="line">            <span class="keyword">cast</span>(<span class="keyword">rand</span>() * <span class="number">100</span> <span class="keyword">as</span> <span class="built_in">bigint</span>) tag,</span><br><span class="line">            user_id </span><br><span class="line">        <span class="keyword">from</span> </span><br><span class="line">            xxtable</span><br><span class="line">        <span class="keyword">group</span> <span class="keyword">by</span>  </span><br><span class="line">            user_id</span><br><span class="line">        )t1 </span><br><span class="line">    <span class="keyword">group</span> <span class="keyword">by</span> </span><br><span class="line">        tag</span><br><span class="line">    )t2;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>1层使用随机数作为分组依据，同时使用group by<code>保证去重</code>。</li>
+<li>2层统计各分组下的统计数。</li>
+<li>3层对分组结果求和。</li>
+</ul>
+<p>经过验证，该方法在5000万数据量的情况下，不优化需要5分钟，经过优化需要2.5分钟，有进一步提升。</p>
 
       
     </div>
@@ -227,18 +228,18 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2017/12/08/设计模式之生成器模式（卷五）/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/08/27/记一次hive中遇到的坑/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          设计模式之生成器模式（卷五）
+          记一次hive中遇到的坑
         
       </div>
     </a>
   
   
-    <a href="/2017/12/04/设计模式之单例模式（卷三）/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">设计模式之单例模式（卷三）</div>
+    <a href="/2017/01/22/2017存钱计划（python实现）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2017存钱计划（python实现）</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -273,7 +274,7 @@ var _hmt = _hmt || [];
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="设计模式之原型模式（卷四）" data-title="设计模式之原型模式（卷四）" data-url="http://z3jjlzt.github.io/2017/12/06/设计模式之原型模式（卷四）/"></div>
+	<div class="ds-thread" data-thread-key="Hive针对distinct的优化（一）" data-title="Hive针对distinct的优化（一）" data-url="http://z3jjlzt.github.io/2017/08/26/Hive针对distinct的优化（一）/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="3oWUXzVhlUfeoSOjgRiOfaMRBeyWszShxl6s1ah0AHk" />
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Synchronized的一些思考 | z3jjlzt&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Synchronized的一些思考。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Synchronized的一些思考">
+<meta property="og:url" content="http://z3jjlzt.github.io/2018/01/23/Synchronized的一些思考/index.html">
+<meta property="og:site_name" content="z3jjlzt's blog">
+<meta property="og:description" content="Synchronized的一些思考。">
+<meta property="og:updated_time" content="2018-01-23T11:33:38.294Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Synchronized的一些思考">
+<meta name="twitter:description" content="Synchronized的一些思考。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e2f71083c9de284190855cc42ffee5c8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://tp2.sinaimg.cn/1516632017/180/5721987710/1" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">z3jjlzt</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">时间轴</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/z3jjlzt" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/z3jjlzt " title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/z3jjlzt" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/android/" style="font-size: 14px;">android</a> <a href="/tags/hive/" style="font-size: 14px;">hive</a> <a href="/tags/java/" style="font-size: 18px;">java</a> <a href="/tags/mapreduce/" style="font-size: 12px;">mapreduce</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/大数据/" style="font-size: 14px;">大数据</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/数据仓库/" style="font-size: 10px;">数据仓库</a> <a href="/tags/虚拟机/" style="font-size: 16px;">虚拟机</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">z3jjlzt</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://tp2.sinaimg.cn/1516632017/180/5721987710/1" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">z3jjlzt</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">时间轴</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/z3jjlzt" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/z3jjlzt " title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/z3jjlzt" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-Synchronized的一些思考" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/01/23/Synchronized的一些思考/" class="article-date">
+  	<time datetime="2018-01-23T11:33:47.000Z" itemprop="datePublished">2018-01-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Synchronized的一些思考
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Synchronized的一些思考。<br><a id="more"></a></p>
+<blockquote>
+<p>前些天被问到Synchronized关键字的一些用法和区别，发现自己的理解比较浅，因此在这作一个总结。</p>
+</blockquote>
+<h2 id="0x00-定义"><a href="#0x00-定义" class="headerlink" title="0x00 定义"></a>0x00 定义</h2><blockquote>
+<p>synchronized<code>是一种同步锁</code>。采用synchronized修饰符实现的同步机制叫做<code>互斥锁机制</code>，它所获得的锁叫做互斥锁。<code>每个对象都有一个monitor(锁标记)</code>，当线程拥有这个锁标记时才能访问这个资源，没有锁标记便进入锁池。任何一个对象系统都会为其创建一个互斥锁，这个锁是为了分配给线程的，<code>防止打断原子操作</code>。每个对象的锁只能分配给一个线程，因此叫做互斥锁。</p>
+</blockquote>
+<h2 id="0x01-使用场景"><a href="#0x01-使用场景" class="headerlink" title="0x01 使用场景"></a>0x01 使用场景</h2><blockquote>
+<p>按照作用域的划分，可以分为以下四种。</p>
+</blockquote>
+<ol>
+<li>修饰代码块，作用范围为{}之间的代码，作用的对象是调用这个代码块的对象。</li>
+<li>修饰普通方法，作用范围为整个方法，作用的对象为调用该方法的对象实例。</li>
+<li>修饰静态方法，作用范围为整个类，作用的对象为该类的所有对象实例。</li>
+<li>修饰类，如synchronized(xxx.class）{}，作用的范围为{}部分，作用的对象为该类的所有对象实例。</li>
+</ol>
+<h2 id="0x11-修饰代码块"><a href="#0x11-修饰代码块" class="headerlink" title="0x11 修饰代码块"></a>0x11 修饰代码块</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kkk.pattern;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Created by z3jjlzt on 2018/1/23.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SyncTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pNum</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(<span class="keyword">this</span>)&#123;</span><br><span class="line">            System.out.println(Thread.currentThread());</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">                System.out.print(<span class="string">"^"</span>+ i + <span class="string">"*"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">r</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        SyncTest syncTest;</span><br><span class="line">        <span class="keyword">int</span> num;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">r</span><span class="params">(SyncTest syncTest, <span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.syncTest = syncTest;</span><br><span class="line">            <span class="keyword">this</span>.num = num;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                <span class="keyword">this</span>.syncTest.pNum(<span class="keyword">this</span>.num);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">500</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SyncTest syncTest = <span class="keyword">new</span> SyncTest();</span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> r(syncTest, <span class="number">1</span>));</span><br><span class="line">        Thread thread1 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> r(syncTest, <span class="number">1</span>));</span><br><span class="line">        thread.start();</span><br><span class="line">        thread1.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">Thread[Thread-<span class="number">0</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">Thread[Thread-<span class="number">1</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">Thread[Thread-<span class="number">0</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">Thread[Thread-<span class="number">1</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">Thread[Thread-<span class="number">0</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">Thread[Thread-<span class="number">1</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>通过输出可以看出，当多个线程同时调用一个synchronized方法时，在同一时间，只能有一个线程能够持有该方法的锁并执行该方法，其他线程只能等待。<br>需要注意的时，在两个线程中，传入的时同一个对象SyncTest，如果传入的对象不相同，那么两个线程的代码可以并发执行，原因是<code>synchronized只锁定对象实例，不同对象实例之间的锁互不影响</code>。</p>
+<h2 id="0x11-修饰普通方法"><a href="#0x11-修饰普通方法" class="headerlink" title="0x11 修饰普通方法"></a>0x11 修饰普通方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kkk.pattern;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Created by z3jjlzt on 2018/1/23.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SyncTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">pNum</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        System.out.println(Thread.currentThread());</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            System.out.print(<span class="string">"^"</span>+ i + <span class="string">"*"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">r</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        SyncTest syncTest;</span><br><span class="line">        <span class="keyword">int</span> num;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">r</span><span class="params">(SyncTest syncTest, <span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.syncTest = syncTest;</span><br><span class="line">            <span class="keyword">this</span>.num = num;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                <span class="keyword">this</span>.syncTest.pNum(<span class="keyword">this</span>.num);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">500</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SyncTest syncTest = <span class="keyword">new</span> SyncTest();</span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> r(syncTest, <span class="number">1</span>));</span><br><span class="line">        Thread thread1 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> r(syncTest, <span class="number">1</span>));</span><br><span class="line">        thread.start();</span><br><span class="line">        thread1.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">Thread[Thread-<span class="number">0</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">Thread[Thread-<span class="number">1</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">Thread[Thread-<span class="number">0</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">Thread[Thread-<span class="number">1</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">Thread[Thread-<span class="number">0</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">Thread[Thread-<span class="number">1</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>输出结果和前面相同，但由于synchronized的系统开销比较大，所以在都能实现功能的前提下，尽量多使用同步代码块的方式来减少系统开销。</p>
+<h2 id="0x100-修饰静态方法"><a href="#0x100-修饰静态方法" class="headerlink" title="0x100 修饰静态方法"></a>0x100 修饰静态方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kkk.pattern;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Created by z3jjlzt on 2018/1/23.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SyncTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">pNum</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        System.out.println(Thread.currentThread());</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            System.out.print(<span class="string">"^"</span>+ i + <span class="string">"*"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">r</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        SyncTest syncTest;</span><br><span class="line">        <span class="keyword">int</span> num;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">r</span><span class="params">(SyncTest syncTest, <span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.syncTest = syncTest;</span><br><span class="line">            <span class="keyword">this</span>.num = num;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                <span class="keyword">this</span>.syncTest.pNum(<span class="keyword">this</span>.num);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">500</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SyncTest syncTest = <span class="keyword">new</span> SyncTest();</span><br><span class="line">        SyncTest syncTest1 = <span class="keyword">new</span> SyncTest();</span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> r(syncTest, <span class="number">1</span>));</span><br><span class="line">        Thread thread1 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> r(syncTest1, <span class="number">1</span>));</span><br><span class="line">        thread.start();</span><br><span class="line">        thread1.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">Thread[Thread-<span class="number">0</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">Thread[Thread-<span class="number">1</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">Thread[Thread-<span class="number">0</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">Thread[Thread-<span class="number">1</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">Thread[Thread-<span class="number">0</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">Thread[Thread-<span class="number">1</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>在该情况下，synchronized作用的对象是类的所有实例对象。</p>
+<h2 id="0x101-修饰一个类"><a href="#0x101-修饰一个类" class="headerlink" title="0x101 修饰一个类"></a>0x101 修饰一个类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kkk.pattern;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Created by z3jjlzt on 2018/1/23.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SyncTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pNum</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(<span class="keyword">this</span>)&#123;</span><br><span class="line">            System.out.println(Thread.currentThread());</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">                System.out.print(<span class="string">"^"</span>+ i + <span class="string">"*"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">r</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        SyncTest syncTest;</span><br><span class="line">        <span class="keyword">int</span> num;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">r</span><span class="params">(SyncTest syncTest, <span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.syncTest = syncTest;</span><br><span class="line">            <span class="keyword">this</span>.num = num;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                <span class="keyword">this</span>.syncTest.pNum(<span class="keyword">this</span>.num);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">500</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SyncTest syncTest = <span class="keyword">new</span> SyncTest();</span><br><span class="line">        SyncTest syncTest1 = <span class="keyword">new</span> SyncTest();</span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> r(syncTest, <span class="number">1</span>));</span><br><span class="line">        Thread thread1 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> r(syncTest1, <span class="number">1</span>));</span><br><span class="line">        thread.start();</span><br><span class="line">        thread1.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">Thread[Thread-<span class="number">0</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">Thread[Thread-<span class="number">1</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">Thread[Thread-<span class="number">0</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">Thread[Thread-<span class="number">1</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">Thread[Thread-<span class="number">0</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">Thread[Thread-<span class="number">1</span>,<span class="number">5</span>,main]</span><br><span class="line">^<span class="number">0</span>*^<span class="number">1</span>*^<span class="number">2</span>*^<span class="number">3</span>*^<span class="number">4</span>*^<span class="number">5</span>*^<span class="number">6</span>*^<span class="number">7</span>*^<span class="number">8</span>*^<span class="number">9</span>*</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>输出结果和修饰静态方法是一致的。</p>
+<h2 id="0x110-一些补充"><a href="#0x110-一些补充" class="headerlink" title="0x110 一些补充"></a>0x110 一些补充</h2><ul>
+<li>在同一个对象实例中，有多个synchronized修饰的普通方法，多个线程同时访问这些方法（同一个对象实例中），在同一时间内，只能有一个线程能够取得该对象的锁并执行程序，因为<code>在同步方法中，只有获取了锁才能执行方法，而一个对象只有一个锁</code>。</li>
+<li>当只是想让一段代码同步时，可以创建一个特殊的对象来充当锁,生成零长度的byte[]对象只需3条操作码，而Object lock = new Object()则需要7行操作码。</li>
+</ul>
+<h2 id="0xff-参考"><a href="#0xff-参考" class="headerlink" title="0xff 参考"></a>0xff 参考</h2><ul>
+<li><a href="http://blog.csdn.net/luoweifu/article/details/46613015" target="_blank" rel="external">Java中Synchronized的用法</a></li>
+<li><a href="http://blog.csdn.net/ns_code/article/details/17199201" target="_blank" rel="external">使用synchronized获取互斥锁的几点说明</a></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/01/11/设计模式之命令模式（卷十四）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">设计模式之命令模式（卷十四）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Synchronized的一些思考" data-title="Synchronized的一些思考" data-url="http://z3jjlzt.github.io/2018/01/23/Synchronized的一些思考/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 z3jjlzt
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script>
+	var yiliaConfig = {
+		fancybox: false,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
