@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="3oWUXzVhlUfeoSOjgRiOfaMRBeyWszShxl6s1ah0AHk" />
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Java多线程并发杂谈 | z3jjlzt&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Java多线程并发杂谈.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java多线程并发杂谈">
+<meta property="og:url" content="http://z3jjlzt.github.io/2018/05/31/Java多线程并发杂谈/index.html">
+<meta property="og:site_name" content="z3jjlzt's blog">
+<meta property="og:description" content="Java多线程并发杂谈.">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1frjy8gxu0qj20js06o74l.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1frl21teypvj20sx0n1kf6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1frk42tnigfj20ch06swhz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1frk48fxdy1j20jw0g7aaw.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1frk4gkrunej20ik0c5thm.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1frk4lvef59j20pg09wq3j.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1frk8pe7ikkj20nu09oq54.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1frmi1pw8quj20p10gngn7.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1frl384w546j20hb0cd0so.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1frixa728oqj20kd0iv7ju.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1friy2mq6zij20ec0leahj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1frlb0bbxbcj20hb0o00tg.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1frj3cqy73xj20tl0pf4ow.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1frlab3ym85j20i1084ag1.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1frm71jhgd7j21a00oy7wh.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1frm9odumz0j20qi0hkk8q.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1frnfg7d6u1j20p60p8wj2.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1frqvgu4cwsj20lj0hjtm4.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1frqvhm45b2j20ot0i6q3w.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1frqvyjufffj20pm0n0nke.jpg">
+<meta property="og:updated_time" content="2018-06-03T03:30:50.974Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java多线程并发杂谈">
+<meta name="twitter:description" content="Java多线程并发杂谈.">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/5a65f7d1gy1frjy8gxu0qj20js06o74l.jpg">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e2f71083c9de284190855cc42ffee5c8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://tp2.sinaimg.cn/1516632017/180/5721987710/1" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">z3jjlzt</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">时间轴</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/z3jjlzt" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/z3jjlzt " title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/z3jjlzt" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/android/" style="font-size: 14px;">android</a> <a href="/tags/hive/" style="font-size: 14px;">hive</a> <a href="/tags/java/" style="font-size: 18px;">java</a> <a href="/tags/mapreduce/" style="font-size: 12px;">mapreduce</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/多线程/" style="font-size: 12px;">多线程</a> <a href="/tags/大数据/" style="font-size: 14px;">大数据</a> <a href="/tags/并发/" style="font-size: 12px;">并发</a> <a href="/tags/数据仓库/" style="font-size: 10px;">数据仓库</a> <a href="/tags/虚拟机/" style="font-size: 16px;">虚拟机</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">z3jjlzt</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://tp2.sinaimg.cn/1516632017/180/5721987710/1" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">z3jjlzt</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">时间轴</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/z3jjlzt" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/z3jjlzt " title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/z3jjlzt" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-Java多线程并发杂谈" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/05/31/Java多线程并发杂谈/" class="article-date">
+  	<time datetime="2018-05-31T11:33:47.000Z" itemprop="datePublished">2018-05-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java多线程并发杂谈
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Java多线程并发杂谈.<br><a id="more"></a></p>
+<blockquote>
+<p>Java多线程并发杂谈。</p>
+</blockquote>
+<p>[TOC]</p>
+<hr>
+<blockquote>
+<p>在同一程序中运行多个线程本身不会导致问题，问题在于多个线程同时访问临界区中相同的资源时，结果就会变得不可预测，由于涉及了数据可见性，操作的时序性，就会产生多线程并发的问题。</p>
+</blockquote>
+<h2 id="0x000-多线程编程中的三个核心概念"><a href="#0x000-多线程编程中的三个核心概念" class="headerlink" title="0x000 多线程编程中的三个核心概念"></a>0x000 多线程编程中的三个核心概念</h2><ol>
+<li>原子性：跟数据库事务的原子性概念差不多，即一个操作要么全部执行，要么全部都不执行。</li>
+<li>可见性：多个线程并发访问共享变量时，一个线程对共享变量的修改，其它线程能够立即看到。</li>
+<li>顺序性：程序执行的顺序按照代码的先后顺序执行。（CPU为了优化程序执行速度，在保证程序最终的执行结果和代码顺序执行时的结果一致情况下，会改变程序执行顺序，就是指令重排序）<h2 id="0x001-JMM内存模型"><a href="#0x001-JMM内存模型" class="headerlink" title="0x001 JMM内存模型"></a>0x001 JMM内存模型</h2><blockquote>
+<p>jmm屏蔽了底层平台的内存管理细节，目的是定义各个变量（实例变量、类变量、数组对象元素，不含有局部变量，因为线程私有）的访问规则。</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>Java线程间通信是通过共享变量来进行的</li>
+<li>所有的共享变量（实例变量、类变量、数组对象元素，不含有局部变量，因为线程私有）都存储在主内存</li>
+<li>JMM规定了jvm有主内存（堆，线程共享）和工作内存（线程私有）</li>
+<li><ul>
+<li>线程对变量的所有操作（读取，赋值）必须在<code>工作内存</code>中进行，不能直接读写主内存的变量</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>复制变量：主内存–&gt;工作内存（read load）</li>
+<li>使用变量：工作内存（use assign）</li>
+<li>刷新变量：工作内存–&gt;主内存（store write）<br><img src="http://ww1.sinaimg.cn/large/5a65f7d1gy1frjy8gxu0qj20js06o74l.jpg" alt=""></li>
+</ol>
+<p>a. 有了工作内存，线程间的工作内存就有了相互隔离的效果，术语就称之为<code>可见性问题</code>。<br>b. 当线程执行完read laod操作时，会引用该变量副本；此时如果该线程再一次引用该字段，就有两种选择，重新从主内存复制变量（read load use）和直接使用已有变量副本（use），如何选择由jvm通过定义的8大内存交换规则决定；而这个时候线程间的先后顺序，会对程序的最终结果产生影响，术语称之为<code>时序性问题</code>。</p>
+<h2 id="0x001-什么是线程不安全"><a href="#0x001-什么是线程不安全" class="headerlink" title="0x001 什么是线程不安全"></a>0x001 什么是线程不安全</h2><blockquote>
+<p>多个线程同时操作一个共享变量时发生了相互修改和串行的情况，没有保证数据一致性，导致结果不可预测，称这样设计的代码为线程不安全。</p>
+</blockquote>
+<h2 id="0x010-Java解决多线程并发问题"><a href="#0x010-Java解决多线程并发问题" class="headerlink" title="0x010 Java解决多线程并发问题"></a>0x010 Java解决多线程并发问题</h2><h3 id="a-Java保证原子性"><a href="#a-Java保证原子性" class="headerlink" title="a. Java保证原子性"></a>a. Java保证原子性</h3><blockquote>
+<p>有三种方式，锁Lock、同步Synchronized和CAS（compare and swap）</p>
+</blockquote>
+<h4 id="1-显式锁Lock方式"><a href="#1-显式锁Lock方式" class="headerlink" title="1. 显式锁Lock方式"></a>1. 显式锁Lock方式</h4><blockquote>
+<p>相比于内置锁，显示锁与之有如下不同。</p>
+</blockquote>
+<ul>
+<li>显式锁的加解锁都需要手动调用</li>
+<li>内置锁唤醒和等待是通过Object的方法wait/notify/notifyAll进行的，同时内置锁无法实现精准唤醒</li>
+<li>显式锁唤醒和等待是用Condition的await/signal/signalAll,同时由于显式锁可以关联多个condition对象，因此可实现精准唤醒<br><img src="http://ww1.sinaimg.cn/large/5a65f7d1gy1frl21teypvj20sx0n1kf6.jpg" alt=""></li>
+</ul>
+<h4 id="2-内置锁，同步Synchronized方式"><a href="#2-内置锁，同步Synchronized方式" class="headerlink" title="2. 内置锁，同步Synchronized方式"></a>2. 内置锁，同步Synchronized方式</h4><blockquote>
+<p>synchronized<code>是一种同步锁</code>，同时也是一种悲观锁。采用synchronized修饰符实现的同步机制叫做<code>互斥锁机制</code>，它所获得的锁叫做互斥锁。<code>每个对象都有一个monitor(锁标记)</code>，当线程拥有这个锁标记时才能访问这个资源，没有锁标记便进入锁池。任何一个对象系统都会为其创建一个互斥锁，这个锁是为了分配给线程的，<code>防止打断原子操作</code>。每个对象的锁只能分配给一个线程，因此叫做互斥锁。</p>
+</blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/5a65f7d1gy1frk42tnigfj20ch06swhz.jpg" alt=""></p>
+<center>同步代码块</center><br><img src="http://ww1.sinaimg.cn/large/5a65f7d1gy1frk48fxdy1j20jw0g7aaw.jpg" alt=""><br><center>同步代码块字节码</center><br><img src="http://ww1.sinaimg.cn/large/5a65f7d1gy1frk4gkrunej20ik0c5thm.jpg" alt=""><br><center>同步方法</center><br><img src="http://ww1.sinaimg.cn/large/5a65f7d1gy1frk4lvef59j20pg09wq3j.jpg" alt=""><br><center>同步方法字节码</center>
+
+<p>另外，在同一个对象实例中，有多个synchronized修饰的普通方法，多个线程同时访问这些方法（同一个对象实例中），在同一时间内，只能有一个线程能够取得该对象的锁并执行程序，因为<code>在同步方法中，只有获取了锁才能执行方法，而一个对象只有一个锁</code>。</p>
+<blockquote>
+<p>对象在内存中的存储布局，分为3个区域：对象头（Header）、实例数据（Instance Data）、对齐填充（Padding）。<br> Header：包含两部分1.Mark Word，2.类型指针，即指向对象的类元数据的指针。</p>
+</blockquote>
+<ul>
+<li><p>锁级别从低到高依次为：无状态锁，偏向锁，轻量级锁和重量级锁状态，这几个状态会随着竞争情况逐渐升级。锁可以升级但不能降级。</p>
+<p><img src="http://ww1.sinaimg.cn/large/5a65f7d1gy1frk8pe7ikkj20nu09oq54.jpg" alt=""></p>
+<h4 id="3-CAS（compare-and-swap）"><a href="#3-CAS（compare-and-swap）" class="headerlink" title="3. CAS（compare and swap）"></a>3. CAS（compare and swap）</h4><blockquote>
+<p>CAS有3个操作数，内存值V，旧的预期值A，要修改的新值B。当且仅当预期值A和内存值V相同时，将内存值V修改为B，否则什么都不做。CAS是一种非阻塞方法，现代的CPU提供了特殊的指令，可以自动更新共享数据，而且能够检测到其他线程的干扰，而 compareAndSet() 就用这些代替了锁定。</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li>拿AtomicInteger来研究在没有锁的情况下是如何做到数据正确性的。</li>
+<li><p>首先需要使用volatile来保证可见性。private volatile int value;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">casAdd</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> current = state;</span><br><span class="line">        <span class="keyword">if</span>(compareAndSet(current,current + <span class="number">1</span>))&#123;<span class="comment">//拿current的值A和主内存值V比较</span></span><br><span class="line">            <span class="keyword">return</span> current + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>CAS是一种乐观锁，如果未成功就一直循环，直到成功</p>
+</li>
+<li>CAS存在ABA问题，可以通过为变量增加版本号来解决AtomicStampedReference。</li>
+<li>CAS循环开销大</li>
+<li>CAS只能保证一个共享变量的原子操作，使用AtomicRefefence存储多个共享变量的方式来解决。</li>
+</ul>
+<h3 id="b-Java保证可见性"><a href="#b-Java保证可见性" class="headerlink" title="b. Java保证可见性"></a>b. Java保证可见性</h3><blockquote>
+<p>通过volatie关键字保证。当用volatile修饰某个变量时，这个变量的任何修改会被立即刷新到主内存中，同时其他线程中对该变量的缓存行会被jvm置为无效，因此其它线程需要读取该值时必须从主内存中读取，从而得到最新的值。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//该单例模式 双重检锁一定安全么？</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sington</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Sington instance;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Sington</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Sington <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">synchronized</span>(Sington.class)&#123;</span><br><span class="line">                <span class="keyword">if</span>(instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">                    instance = <span class="keyword">new</span> Sington();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="http://ww1.sinaimg.cn/large/5a65f7d1gy1frk6t0ycc6j20kr0jpq4m.jpg" target="_blank" rel="external">link</a></p>
+<h3 id="c-Java保证顺序性"><a href="#c-Java保证顺序性" class="headerlink" title="c. Java保证顺序性"></a>c. Java保证顺序性</h3><blockquote>
+<p>按照对开发中代码的相关程度，依次有以下方式。</p>
+</blockquote>
+<ol>
+<li>synchronized同步和锁保证顺序性和保证原子性一样，都是通过排他的方式来实现。</li>
+<li>volatile在一定程度上能够保证顺序性。（volatile另一层含义是禁止指令重排序）</li>
+<li>happens-before（先行发生原则），两个操作的执行顺序只要可以通过happens-before推导出来，则JVM会保证其顺序性，反之JVM对其顺序性不作任何保证，可对其进行任意必要的重新排序以获取高效率。</li>
+</ol>
+<ul>
+<li>程序次序规则（Program Order）：在同一线程内，写在前面的操作先行发生于之后的操作。</li>
+<li>管程锁定规则（Monitor Lock）：一个unlock操作先行发生于时间上后面对同一个锁的lock操作。</li>
+<li>volatile变量规则（Volatile Variable）：volatile变量的写操作先行发生于时间上后面对该变量的读操作。</li>
+<li>线程启动规则（Thread Start）：Thread对象的start方法先行发生于线程的每一个动作。</li>
+<li>线程终止规则（Thread Termination）：线程中所有的操作先行发生有线程的终止检测。</li>
+<li>线程中断规则（Thread Interruption）：对线程的interrupt方法调用先行发生于被中断线程的代码检测到该中断事件的发生。</li>
+<li>对象终止原则（Finalizer）：一个对象的初始化完成先行发生于finalize方法的开始。</li>
+<li>传递性（Transitivity）</li>
+</ul>
+<p>看一个重排序的例子：<br><img src="http://ww1.sinaimg.cn/large/5a65f7d1gy1frmi1pw8quj20p10gngn7.jpg" alt=""></p>
+<h2 id="0x011-AQS框架"><a href="#0x011-AQS框架" class="headerlink" title="0x011 AQS框架"></a>0x011 AQS框架</h2><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><blockquote>
+<p>Java并发工具包JUC提供了许多并发工具，如常见的ReentrantLock可重入锁，Semaphore信号量等，它们都有一个共同的父类AbstractQueuedSynchronizer,AQS框架用来构建锁和同步器，该框架底层使用了CAS。</p>
+</blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/5a65f7d1gy1frl384w546j20hb0cd0so.jpg" alt=""></p>
+<center>JUC并发工具包整体架构</center>
+
+<h3 id="2-基本原理"><a href="#2-基本原理" class="headerlink" title="2. 基本原理"></a>2. 基本原理</h3><ul>
+<li>AQS类中持有一个volatile的变量state,用来表示同步状态。</li>
+<li>图中三个方法用来操作同步状态。<br><img src="http://ww1.sinaimg.cn/large/5a65f7d1gy1frixa728oqj20kd0iv7ju.jpg" alt=""></li>
+</ul>
+<p>其中，AQS支持两种同步方式，独占式和共享式</p>
+<p><img src="http://ww1.sinaimg.cn/large/5a65f7d1gy1friy2mq6zij20ec0leahj.jpg" alt=""></p>
+<ol>
+<li>在这里额外说明一点，AbstractQueuedSynchronizer虽然被声明为abstract，但是类中没有任何一个抽象方法，声明为abstract仅仅是为了使得AQS方法无法被实例化，因为上图各个框中的方法默认实现都是直接抛出异常。</li>
+<li>有人可能会疑惑，为什么要用继承而不用接口实现呢，不是说面向接口编程么，其实是框架的作者站在了开发者的角度来考虑的，如果采用接口的方式，那么开发者在实现自定义同步器的时候，比如要实现一个独占式的同步器，那么他也要实现共享式的方法，这样会给开发者带来疑惑，而采用继承的方式，加上模板方法的使用，就可以在子类中只选择重写需要的方法即可。</li>
+</ol>
+<h3 id="3-获取同步状态"><a href="#3-获取同步状态" class="headerlink" title="3. 获取同步状态"></a>3. 获取同步状态</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">acquire</span><span class="params">(<span class="keyword">int</span> arg)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (!tryAcquire(arg) &amp;&amp;</span><br><span class="line">         acquireQueued(addWaiter(Node.EXCLUSIVE), arg))</span><br><span class="line">         selfInterrupt();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>以独占式acquire方法为例。主要步骤如下。</p>
+</blockquote>
+<ol>
+<li>调用子类复写的tryAcquire方法，如果成功直接返回。否则执行步骤2.</li>
+<li>否则，调用addWaiter方法将新增的EXCLUSIVE同步节点加入同步队列的尾部。</li>
+<li>该节点在同步队列尝试获取同步状态，若获取不到，则阻塞结点线程，直到被前驱结点唤醒或者被中断。<br><img src="http://ww1.sinaimg.cn/large/5a65f7d1gy1frlb0bbxbcj20hb0o00tg.jpg" alt=""><br>这里的找安全点是指在shouldParkAfterFailedAcquire方法中，如果前驱放弃了，那就一直往前找，直到找到最近一个正常等待的状态，并排在它的后边。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Node <span class="title">addWaiter</span><span class="params">(Node mode)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//构建新节点，第一个参数表示nextWaiter，</span></span><br><span class="line">    Node node = <span class="keyword">new</span> Node(Thread.currentThread(), mode);</span><br><span class="line">    Node pred = tail;</span><br><span class="line">    <span class="keyword">if</span> (pred != <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="comment">//尾节点不为空，直接cas添加</span></span><br><span class="line">        node.prev = pred;</span><br><span class="line">        <span class="keyword">if</span> (compareAndSetTail(pred, node)) &#123;</span><br><span class="line">            pred.next = node;</span><br><span class="line">            <span class="keyword">return</span> node;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//尾节点为空，进入enq入队列方法</span></span><br><span class="line">    enq(node);</span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> Node <span class="title">enq</span><span class="params">(<span class="keyword">final</span> Node node)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//cas保证正确同步</span></span><br><span class="line">    <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">        Node t = tail;</span><br><span class="line">        <span class="keyword">if</span> (t == <span class="keyword">null</span>) &#123; <span class="comment">// Must initialize</span></span><br><span class="line">            <span class="keyword">if</span> (compareAndSetHead(<span class="keyword">new</span> Node()))</span><br><span class="line">                tail = head;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//有可能多个线程进入enc方法，所以需要该步骤</span></span><br><span class="line">            node.prev = t;</span><br><span class="line">            <span class="keyword">if</span> (compareAndSetTail(t, node)) &#123;</span><br><span class="line">                t.next = node;</span><br><span class="line">                <span class="keyword">return</span> t;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>回头看acquireQuequd请求同步队列方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">acquireQueued</span><span class="params">(<span class="keyword">final</span> Node node, <span class="keyword">int</span> arg)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> failed = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">boolean</span> interrupted = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">            <span class="keyword">final</span> Node p = node.predecessor();<span class="comment">//p为node的前驱节点</span></span><br><span class="line">            <span class="keyword">if</span> (p == head &amp;&amp; tryAcquire(arg)) &#123;<span class="comment">//只有p为头节点才进行尝试获取同步方法</span></span><br><span class="line">                setHead(node);<span class="comment">//获取同步状态成功，设置当前节点为头节点</span></span><br><span class="line">                p.next = <span class="keyword">null</span>; <span class="comment">// 显式置为null，GC发生时回收，（因为成功获得了同步状态，所以p已经可被回收了）</span></span><br><span class="line">                failed = <span class="keyword">false</span>;</span><br><span class="line">                <span class="keyword">return</span> interrupted;</span><br><span class="line">                <span class="comment">//在整个等待过程中被中断过，则返回true，否则返回false</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//如果p不是头节点，或者没有获取到同步状态</span></span><br><span class="line">            <span class="keyword">if</span> (shouldParkAfterFailedAcquire(p, node) &amp;&amp;<span class="comment">//判断是否需要阻塞，在这里找到安全点</span></span><br><span class="line">                parkAndCheckInterrupt())<span class="comment">//进行阻塞</span></span><br><span class="line">                interrupted = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (failed)<span class="comment">//如果失败，取消</span></span><br><span class="line">            cancelAcquire(node);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://ww1.sinaimg.cn/large/5a65f7d1gy1frj3cqy73xj20tl0pf4ow.jpg" alt=""></p>
+<p>再看release方法<br><img src="http://ww1.sinaimg.cn/large/5a65f7d1gy1frlab3ym85j20i1084ag1.jpg" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">unparkSuccessor</span><span class="params">(Node node)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">int</span> ws = node.waitStatus;</span><br><span class="line">     <span class="keyword">if</span> (ws &lt; <span class="number">0</span>)<span class="comment">//置零</span></span><br><span class="line">         compareAndSetWaitStatus(node, ws, <span class="number">0</span>);</span><br><span class="line">     Node s = node.next;<span class="comment">//找到下一个需要唤醒的结点s</span></span><br><span class="line">     <span class="keyword">if</span> (s == <span class="keyword">null</span> || s.waitStatus &gt; <span class="number">0</span>) &#123;<span class="comment">//如果为空或已取消</span></span><br><span class="line">         s = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">for</span> (Node t = tail; t != <span class="keyword">null</span> &amp;&amp; t != node; t = t.prev)</span><br><span class="line">            <span class="keyword">if</span> (t.waitStatus &lt;= <span class="number">0</span>)<span class="comment">//从后向前找第一个状态不为取消的节点</span></span><br><span class="line">                s = t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (s != <span class="keyword">null</span>)</span><br><span class="line">        LockSupport.unpark(s.thread);<span class="comment">//唤醒</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="0x100-线程的中断"><a href="#0x100-线程的中断" class="headerlink" title="0x100 线程的中断"></a>0x100 线程的中断</h2><p>Java中断机制是一种协作机制，也就是说通过中断并不能直接终止另一个线程，而需要被中断的线程自己处理中断。这好比是家里的父母叮嘱在外的子女要注意身体，但子女是否注意身体，怎么注意身体则完全取决于自己。<br>Java中断模型也是这么简单，每个线程对象里都有一个boolean类型的标识（不一定就要是Thread类的字段，实际上也的确不是，这几个方法最终都是通过native方法来完成的），代表着是否有中断请求（该请求可以来自所有线程，包括被中断的线程本身）。例如，当线程t1想中断线程t2，只需要在线程t1中将线程t2对象的中断标识置为true，然后线程2可以选择在合适的时候处理该中断请求，甚至可以不理会该请求，就像这个线程没有被中断一样。</p>
+<p>interrupt()方法是唯一能将中断状态设置为true的方法。<br>API中关于interrupt（)方法的说明：<br>当前状态|结果|备注<br>-|-|-<br>阻塞在wait,sleep,join|清除中断标志，抛出InterruptedException异常|检测不到中断标志<br>阻塞在InterruptibleChannel上|chanel关闭，设置中断标志，线程抛出ClosedByInterruptException异常|有中断标志<br>阻塞在Selector中|设置中断标志，线程立刻返回|有中断标志<br>其他情况|如何处理你自己决定|有中断标志<br><img src="http://ww1.sinaimg.cn/large/5a65f7d1gy1frm71jhgd7j21a00oy7wh.jpg" alt=""></p>
+<ul>
+<li>Java的异常在线程之间不是共享的，在线程中抛出的异常是线程自己的异常，主线程并不能捕获到。</li>
+<li>对于运行时异常，使用UncaughtExceptionHandler()对未捕获的异常进行统一处理。</li>
+</ul>
+<h2 id="0x101-join关键字"><a href="#0x101-join关键字" class="headerlink" title="0x101 join关键字"></a>0x101 join关键字</h2><blockquote>
+<p>join的作用是让主线程等待子线程结束后再执行。</p>
+</blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/5a65f7d1gy1frm9odumz0j20qi0hkk8q.jpg" alt=""></p>
+<h2 id="0x110-等待-通知机制"><a href="#0x110-等待-通知机制" class="headerlink" title="0x110 等待/通知机制"></a>0x110 等待/通知机制</h2><blockquote>
+<p>每个锁对象都有两个队列，一个是同步队列，一个是等待队列。同步队列存储了已就绪（将要竞争锁）的线程，等待队列存储了被阻塞的线程。当一个阻塞线程被唤醒后，才会进入同步队列，进而等待CPU的调度；反之，当一个线程被wait后，就会进入等待队列，等待被唤醒。唤醒只意味着进入了同步队列，不意味着一定能获得资源。</p>
+</blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/5a65f7d1gy1frnfg7d6u1j20p60p8wj2.jpg" alt=""></p>
+<h2 id="0x111-线程池"><a href="#0x111-线程池" class="headerlink" title="0x111 线程池"></a>0x111 线程池</h2><blockquote>
+<p>线程的创建和切换开销是很大的，合理的使用线程池能够带来3个很明显的好处：<br>1.降低资源开销：可以重用已创建的线程来降低线程创建和销毁的开销<br>2.提高响应速度：不需要等待线程创建就可以立即执行<br>3.线程统一关联：线程池可以统一管理、分配、调优和监控</p>
+</blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/5a65f7d1gy1frqvgu4cwsj20lj0hjtm4.jpg" alt=""></p>
+<p><center>线程池继承关系图</center><br><img src="http://ww1.sinaimg.cn/large/5a65f7d1gy1frqvhm45b2j20ot0i6q3w.jpg" alt=""></p>
+<p><center>线程池调度流程</center><br><img src="http://ww1.sinaimg.cn/large/5a65f7d1gy1frqvyjufffj20pm0n0nke.jpg" alt=""></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/01/23/Synchronized的一些思考/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Synchronized的一些思考</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Java多线程并发杂谈" data-title="Java多线程并发杂谈" data-url="http://z3jjlzt.github.io/2018/05/31/Java多线程并发杂谈/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 z3jjlzt
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script>
+	var yiliaConfig = {
+		fancybox: false,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
